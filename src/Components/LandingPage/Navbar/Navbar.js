@@ -20,22 +20,26 @@ export default function ButtonAppBar() {
         <Box>
             <AppBar position="static">
                 <Toolbar variant="dense">
+
                     <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
                     >
-                    <ApartmentIcon />
-                        </IconButton>
+                        <ApartmentIcon />
+                    </IconButton>
+
                     <Typography variant="h6" component="div">
-                        Lorem Ipsum
+                        Things
                     </Typography>
+
                     <div className={classes.toolbarButtons}>
                         <Button variant="text" color="inherit">Login</Button>
                         <Button variant="outlined" color="inherit">Sign Up</Button>
                     </div>
+
                 </Toolbar>
             </AppBar>
         </Box>

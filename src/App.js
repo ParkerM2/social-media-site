@@ -3,6 +3,7 @@ import './App.css';
 import LandingPage from './Pages/LandingPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
+const font =  "'Quicksand'";
 const theme = createTheme({
   palette: {
     primary: {
@@ -17,7 +18,10 @@ const theme = createTheme({
       dark: '#00b2cc',
       contrastText: '#000000',
     },
-  }
+  },
+  typography: {
+    fontFamily: font,
+  },
 });
 
 function App() {
