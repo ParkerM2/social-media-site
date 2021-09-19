@@ -11,7 +11,7 @@ import {makeStyles} from '@mui/styles';
 const useStyles = makeStyles({
     toolbarButtons: {
         marginLeft: 'auto'
-    }
+    },
 })
 
 export default function ButtonAppBar() {
@@ -19,7 +19,7 @@ export default function ButtonAppBar() {
   return (
         <Box>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar variant="dense">
                     <IconButton
                     size="large"
                     edge="start"
