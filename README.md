@@ -9,8 +9,12 @@
 
 ## [Click here to go to the Website!]()
 
-![HomePage](https://github.com/ParkerM2/ManningSignsV2/blob/main/manning/Client/src/videos/Overview.gif)
+![HomePage](https://github.com/ParkerM2/social-media-site/blob/main/src/images/background.jpg)
 
 ### 🏠 [Project Homepage](https://github.com/ParkerM2/social-media-site)
+
+---
+
+![HomePage2](https://github.com/ParkerM2/social-media-site/blob/main/src/images/secondcontent.PNG)
 
 ---
