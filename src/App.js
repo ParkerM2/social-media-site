@@ -1,7 +1,10 @@
 import React from 'react';
 import './App.css';
 import LandingPage from './Pages/LandingPage';
+import RegistrationPage from './Pages/RegistrationPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignIn from './Pages/SignIn';
 
 const font =  "'Quicksand'";
 const theme = createTheme({
@@ -28,8 +31,23 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <LandingPage />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <LandingPage />
+            </Route>
+            
+            <Route path="/register">
+              <RegistrationPage />
+            </Route>
+
+            <Route path="/signin">
+              <SignIn />
+            </Route>
+          </Switch>
+        </Router>
       </ThemeProvider>
+      
     </div>
   );
 }
