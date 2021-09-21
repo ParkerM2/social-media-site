@@ -9,7 +9,7 @@
 
 ## [Click here to go to the Website!]()
 
-![HomePage](https://github.com/ParkerM2/social-media-site/blob/main/src/images/background.jpg)
+![HomePage](https://github.com/ParkerM2/social-media-site/blob/main/src/images/homepage.PNG)
 
 ### 🏠 [Project Homepage](https://github.com/ParkerM2/social-media-site)
 
