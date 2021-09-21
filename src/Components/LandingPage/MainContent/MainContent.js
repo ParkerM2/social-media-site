@@ -33,11 +33,6 @@ export default function MainContent() {
                                 <Typography color="secondary">Post things</Typography>
                             </Button>
                         </Grid>
-                        <Grid item xs={10} md={6} lg={3}>
-                            <Button fullWidth variant="contained" color="primary" endIcon={<ArrowForwardIosIcon color="secondary"/>}>
-                                <Typography color="secondary">Like things</Typography>
-                            </Button>
-                        </Grid>
                     </Grid>
                 </Box>
             </Box>

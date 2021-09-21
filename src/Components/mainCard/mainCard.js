@@ -7,9 +7,25 @@ import {
     Typography,
     CardMedia,
     IconButton,
+    CardContent,
+    Collapse,
+    CardActions
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
+const ExpandMore = styled((props) => {
+    const { expand, ...other } = props;
+    return <IconButton {...other} />;
+  })(({ theme, expand }) => ({
+    transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+    marginLeft: 'auto',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+  }));
+  
 
 
 export default function MainCard(props) {
@@ -22,14 +38,14 @@ export default function MainCard(props) {
                 <Paper
                     sx={{
                         backgroundColor: 'primary.main',
-                        height: 600,
+                        height: 575,
                         maxWidth: 375,
                     }}
                     elevation={16}
                     variant="outlined" 
                     >
 
-                    <Grid container sx={{padding: '6px'}} flexDirection='row' justifyContent="space-between">
+                    <Grid container sx={{padding: '2px'}} flexDirection='row' justifyContent="space-between">
                         <Grid item sx={{padding: '2px'}}>
                             <Avatar sx={{ width: 44, height: 44, bgcolor: 'secondary.dark', color: 'black'}} src={userPhoto} />
                         </Grid>
@@ -52,7 +68,7 @@ export default function MainCard(props) {
 
                     
 
-                    <Divider variant="middle"/>
+                    <Divider  color="primary.dark" variant="middle"/>
                     
                     <Grid sx={{paddingTop: '4px', paddingBottom: '4px'}} container justifyContent="center">
                         <Grid item>
@@ -67,13 +83,10 @@ export default function MainCard(props) {
                             />                           
                         </Grid>
                     </Grid>
-                    <Divider />
-                    <Grid container justifyContent="left" sx={{padding: '8px'}}>
-                        <Grid item>
-                            <Typography variant="caption" color="secondary.dark"> <b>{username} : </b>{' '} {description}</Typography>
-                        </Grid>
-                    </Grid>
-
+                    <Divider variant="middle" color="primary.dark" />
+                        <CardContent sx={{paddingTop: .5, overflowY: 'scroll', height: '80px'}}>
+                            <Typography variant="caption" color="secondary.main"> <b>{username} : </b>{' '} {description}</Typography>
+                        </CardContent>
                 </Paper>
 
             </Grid> 
