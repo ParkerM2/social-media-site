@@ -24,9 +24,10 @@ export default function ButtonAppBar() {
                     <IconButton
                         size="large"
                         edge="start"
-                        color="inherit"
+                        color="secondary"
                         aria-label="menu"
                         sx={{ mr: 2 }}
+                        href="/"
                     >
                         <ApartmentIcon />
                     </IconButton>
@@ -36,8 +37,8 @@ export default function ButtonAppBar() {
                     </Typography>
 
                     <div className={classes.toolbarButtons}>
-                        <Button variant="text" color="inherit">Login</Button>
-                        <Button variant="outlined" color="inherit">Sign Up</Button>
+                        <Button variant="text" color="inherit" href="/signin">Login</Button>
+                        <Button variant="outlined" color="secondary" href="/register">Sign Up</Button>
                     </div>
 
                 </Toolbar>
