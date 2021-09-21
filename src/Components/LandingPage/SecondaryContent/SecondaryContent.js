@@ -1,11 +1,7 @@
 import React from 'react';
-import { Avatar, Card, CardContent, CardHeader, Typography, Container, Box, IconButton, Grid, Button, Paper, Divider, CardMedia } from '@mui/material';
+import { Typography, Box, Grid, Paper } from '@mui/material';
 import rockbackground from '../../../images/rockbackground.jpg'
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import MainCard from '../../mainCard/mainCard';
-import linus from '../../../images/linus.png';
 import boatCardImage from '../../../images/boatpic.jpg';
 import doggo from '../../../images/doggo.JPG';
 const description = "Contrary to popular belisdfsdfsdfsdfsdfsdfs sdfsd s sdf sd sdf sdf sfd sdfsdfsd sdfsdfsd ef, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one"
@@ -37,7 +33,7 @@ export default function SecondaryContent() {
                         </Grid>
                     </Grid>
 
-                    <Grid container justifyContent="center" sx={{paddingLeft: 0}} spacing={3}>
+                    <Grid id="secondaryContent" container justifyContent="center" sx={{paddingLeft: 0}} spacing={3}>
                         <Grid justifyContent="center" sx={{marginTop: 20, maxWidth: 500}} item lg={4}>
                             <Paper elevation={18} sx={{padding: 2, bgcolor: 'primary.main'}}>
                                 <Typography variant="h4" color="secondary.dark">Things :</Typography>
