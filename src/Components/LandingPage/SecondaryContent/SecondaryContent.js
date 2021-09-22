@@ -10,7 +10,7 @@ export default function SecondaryContent() {
 
     return (
         <>
-            <Box sx={{
+            <Box id="secondaryContent" sx={{
                 minHeight: '80vh', 
                 position: 'flex',
                 backgroundSize: 'cover',
@@ -20,7 +20,7 @@ export default function SecondaryContent() {
                 objectFit: 'cover',
                 paddingBottom: '5vh',
                 textAlign: 'left',
-                paddingTop: '5vh'
+                paddingTop: '5vh',
             }}>
                 <Box>
 
@@ -33,7 +33,7 @@ export default function SecondaryContent() {
                         </Grid>
                     </Grid>
 
-                    <Grid id="secondaryContent" container justifyContent="center" sx={{paddingLeft: 0}} spacing={3}>
+                    <Grid container justifyContent="center" sx={{paddingLeft: 0}} spacing={3}>
                         <Grid justifyContent="center" sx={{marginTop: 20, maxWidth: 500}} item lg={4}>
                             <Paper elevation={18} sx={{padding: 2, bgcolor: 'primary.main'}}>
                                 <Typography variant="h4" color="secondary.dark">Things :</Typography>

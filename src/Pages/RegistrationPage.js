@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import NavBar from '../Components/LandingPage/Navbar/Navbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-
+import Divider from '@mui/material/Divider';
 
 
 export default function SignUp() {
@@ -33,13 +33,14 @@ export default function SignUp() {
         <NavBar />
         <Grid sx={{
                 bgcolor: 'primary.dark', 
-                height: '90vh', 
+                minHeight: '90vh', 
                 position: 'relative',
                 backgroundSize: 'cover', 
                 backgroundPosition: 'center', 
                 backgroundRepeat: 'no-repeat',
                 objectFit: 'cover',
-                textAlign: 'left'
+                textAlign: 'left',
+                paddingBottom: 8
             }}>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -131,6 +132,7 @@ export default function SignUp() {
             </Box>
         </Container>
         </Grid>
+        <Divider />
         <Footer />
         </>
     );
