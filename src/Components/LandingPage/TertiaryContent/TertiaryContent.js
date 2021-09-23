@@ -24,6 +24,8 @@ const handleSubmit = (event) => {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
       email: data.get('email'),
       password: data.get('password'),
     });
@@ -79,7 +81,7 @@ export default function ThirdContent () {
                                 >
                                 <Paper elevation={12} sx={{bgcolor: 'primary.contrastText', color: 'secondary.dark', padding: 2}}>
                                     <Grid container justifyContent="center">
-                                        <Grid item>
+                                        <Grid item align="center">
                                             <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
                                                 <ApartmentIcon />
                                             </Avatar>

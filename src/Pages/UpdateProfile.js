@@ -14,12 +14,14 @@ import Container from '@mui/material/Container';
 import NavBar from '../Components/LandingPage/Navbar/Navbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
 import ApartmentIcon from '@mui/icons-material/Apartment';
+import FormLabel from '@mui/material/FormLabel';
 import Divider from '@mui/material/Divider';
 import { useAuth } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
+import AddImage from '../Components/ProfileImageContainer/AddImage/AddImage';
 
 
-export default function SignUp() {
+export default function UpdateProfile() {
     const { signup, currentUser, logout } = useAuth();
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(false)
@@ -85,7 +87,7 @@ export default function SignUp() {
                             <ApartmentIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign up
+                            Update Profile
                         </Typography>
                     </Grid>
                 </Grid>
@@ -95,29 +97,24 @@ export default function SignUp() {
                             <TextField
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
+                            id="displayName"
+                            label="Display Name"
+                            name="displayName"
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                             required
                             fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
+                            name="phoneNumber"
+                            label="Phone Number"
+                            type="number"
+                            id="phoneNumber"
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                            required
-                            fullWidth
-                            name="confirmPassword"
-                            label="Confirm Password"
-                            type="password"
-                            id="confirmPassword"
+                            <Typography> Choose a Profile Picture </Typography>
+                            <AddImage
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -134,15 +131,8 @@ export default function SignUp() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                             >
-                            Sign Up
+                           Submit
                         </Button>
-                    <Grid container justifyContent="flex-end">
-                        <Grid item>
-                            <Link href="/signin" variant="body2">
-                            Already have an account? Sign in
-                            </Link>
-                        </Grid>
-                    </Grid>
                     </Box>
                 </Paper>
             </Box>
