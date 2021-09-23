@@ -5,6 +5,11 @@ import RegistrationPage from './Pages/RegistrationPage';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from './Pages/SignIn';
+import Home from './Pages/Home';
+import UpdateProfile from './Pages/UpdateProfile';
+import Profile from './Pages/Profile';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 const font =  "'Quicksand'";
 const theme = createTheme({
@@ -31,6 +36,7 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
+      <AuthProvider>
         <Router>
           <Switch>
             <Route exact path="/">
@@ -44,8 +50,21 @@ function App() {
             <Route path="/signin">
               <SignIn />
             </Route>
+  
+            <PrivateRoute path="/home">
+              <Home />
+            </PrivateRoute>
+      
+            <Route path="/profile/:id">
+              <Profile />
+            </Route>
+
+            <Route path="/update">
+              <UpdateProfile />
+            </Route>
           </Switch>
         </Router>
+        </AuthProvider>
       </ThemeProvider>
       
     </div>

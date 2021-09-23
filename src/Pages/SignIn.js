@@ -15,6 +15,7 @@ import NavBar from '../Components/LandingPage/Navbar/Navbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
 import Paper from '@mui/material/Paper';
 import Apartment from '@mui/icons-material/Apartment';
+import { Divider } from '@mui/material';
 
 export default function SignIn() {
 
@@ -23,15 +24,25 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    //   email: data.get('email'),
+    //   password: data.get('password'),
     });
   };
 
   return (
     <> 
         <NavBar />
-            <Grid sx={{ bgcolor: 'primary.dark', height: '90vh', position: 'relative'}}>
+            <Grid sx={{
+                bgcolor: 'primary.dark', 
+                minHeight: '90vh', 
+                position: 'relative',
+                backgroundSize: 'cover', 
+                backgroundPosition: 'center', 
+                backgroundRepeat: 'no-repeat',
+                objectFit: 'cover',
+                textAlign: 'left',
+                paddingBottom: 8
+                }}>
                     <Container component="main" maxWidth="xs">
                         <CssBaseline />
                         <Box
@@ -45,7 +56,7 @@ export default function SignIn() {
 
                         <Paper square variant="outlined" sx={{bgcolor: 'white', color: 'secondary', padding: 4}}>
                             <Grid container justifyContent="center">
-                                <Grid item>
+                                <Grid item align="center">
                                     <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
                                         <Apartment />
                                     </Avatar>
@@ -105,6 +116,7 @@ export default function SignIn() {
                         </Box>
                     </Container>
             </Grid>
+            <Divider />
         <Footer />
     </>
   );
