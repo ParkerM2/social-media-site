@@ -8,7 +8,6 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import NavBar from '../Components/LandingPage/Navbar/Navbar';
@@ -16,17 +15,28 @@ import Footer from '../Components/LandingPage/Footer/Footer';
 import Paper from '@mui/material/Paper';
 import Apartment from '@mui/icons-material/Apartment';
 import { Divider } from '@mui/material';
+import { useAuth } from '../context/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 export default function SignIn() {
+    const [errorText, setErrorText] = React.useState('')
+    const history = useHistory();
+    const { login } = useAuth();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    
+
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    });
+    try {
+        setErrorText('')
+        await login(data.get('email'), data.get('password'));
+        history.push('/home');
+    } catch {
+        console.log('erro')
+        setErrorText('An Error Occurred')
+    }
+    
   };
 
   return (
@@ -63,6 +73,12 @@ export default function SignIn() {
                                     <Typography component="h1" variant="h5">
                                         Sign in
                                     </Typography>
+                                    
+                                    {errorText && 
+                                    <Typography component="h1" variant="h5">
+                                        {errorText}
+                                    </Typography>
+                                    }
                                 </Grid>
                             </Grid>
 

@@ -8,9 +8,8 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import {makeStyles} from '@mui/styles';
 import Avatar from '@mui/material/Avatar';
 import userPhoto from '../../images/doggo.JPG';
-
 import { useAuth } from '../../context/AuthContext';
-
+import {Link} from 'react-router-dom';
 const useStyles = makeStyles({
     toolbarButtons: {
         marginLeft: 'auto'
@@ -18,11 +17,10 @@ const useStyles = makeStyles({
 })
 
 export default function ButtonAppBar() {
+    const {currentUser} = useAuth()
     const classes = useStyles();
-    // const { currentUser } = useAuth();
-    // currentUser will contain user obj from firestore
-    // currentUser.userPhoto will contain image for navbar
 
+    
   return (
         <Box>
             <AppBar position="static">
@@ -43,9 +41,13 @@ export default function ButtonAppBar() {
                     </Typography>
 
                     <div className={classes.toolbarButtons}>
+                        <Link to={{
+                            pathname: `/profile/${currentUser.uid}`
+                        }}>
                         <IconButton>
-                            <Avatar sx={{ width: 44, height: 44, bgcolor: 'secondary.dark', color: 'black'}} src={userPhoto} />
+                            <Avatar sx={{ width: 44, height: 44, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
+                        </Link>
                     </div>
                 </Toolbar>
             </AppBar>

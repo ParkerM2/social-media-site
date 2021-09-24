@@ -1,59 +1,72 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import NavBar from '../Components/LandingPage/Navbar/Navbar';
+import {
+    Avatar,
+    Button,
+    CssBaseline,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Link,
+    Grid,
+    Box,
+    Typography,
+    Paper,
+    Container,
+    Divider,
+} from '@mui/material';
 import Footer from '../Components/LandingPage/Footer/Footer';
+import NavBar from '../Components/LandingPage/Navbar/Navbar';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import Divider from '@mui/material/Divider';
-import { useAuth } from '../context/AuthContext';
-import { useHistory } from 'react-router-dom';
-
+import { db, useAuth } from '../context/AuthContext';
+import { doesUsernameExist } from '../services/firebase/firebase';
+import {doc, setDoc, serverTimestamp} from 'firebase/firestore';
+import {updateProfile, getAuth, signOut} from 'firebase/auth';
 
 export default function SignUp() {
-    const { signup, currentUser, logout } = useAuth();
+    const { signup } = useAuth();
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(false)
-    const [success, setSuccess] = React.useState(false);
-    const history = useHistory();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    // check for password confirmation
-    if (data.get('password') !== data.get('confirmPassword')) {
-        return setError("Passwords Do Not Match")
-    };
-    
-    // try/catch clean state of error and set loading to tre
-    // loading to true disables current use of button so multiple accounts are not created
-    // history.push sends user back to home page (might change to login page)
-    try{
-        setError("")
-        setLoading(true)
-        await signup(data.get('email'), data.get('password'))
-        setSuccess(true)
-        // put a snackbar popup for success******
-        history.push('/update')
-    } catch {
-        console.log('error hoe')
+        const data = new FormData(event.currentTarget);
+
+        // check for password confirmation
+        if (data.get('password') !== data.get('confirmPassword')) {
+            return setError("Passwords Do Not Match")
+        };
+        const usernameExist= await doesUsernameExist(data.get('userName'));
+
+        if (!usernameExist) {
+        
+            try{
+                const auth = getAuth();
+                signOut(auth);
+                await signup(data.get('email'), data.get('password')).then((user) => (
+                    // update profile display name
+                    updateProfile(user, {
+                        displayName: data.get('userName')
+                    }),
+                    //  add user data and structure to firestore collection
+                    setDoc(doc(db, 'users', user.uid), {
+                        username: data.get('userName').toLowerCase(),
+                        fullname: data.get('fullName'),
+                        emailAddress: data.get('email').toLowerCase(),
+                        following: [],
+                        followers: [],
+                        dateCreated: serverTimestamp()
+                    })
+                
+                ));
+            } catch(error) {
+                setError(error.message)
+            }
+            setLoading(false)
+        } else {
+            setError('That Username is already taken, please try a different one');
+        }
     }
-   
-
-    // sets button back to not being disabled
-    setLoading(false)
-  };
-
     return(
         <>
         <NavBar />
@@ -90,7 +103,26 @@ export default function SignUp() {
                     </Grid>
                 </Grid>
                 <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    {error && <Typography variant="p"> {error} </Typography>}
                     <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            id="userName"
+                            label="UserName"
+                            name="userName"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            id="fullName"
+                            label="Full Name"
+                            name="fullName"
+                            />
+                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                             required

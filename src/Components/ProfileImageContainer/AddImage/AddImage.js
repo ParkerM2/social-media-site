@@ -1,17 +1,25 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { ProgressUpdateUserProfileImage } from '../../Progress/ProgressUserPhoto';
 
 
 export default function AddImage () {
     const [selectedImage, setSelectedImage] = React.useState(null);
     const [imageUrl, setImageUrl] = React.useState(null);
+    const [newImage, setNewImage] = React.useState();
   
     React.useEffect(() => {
       if (selectedImage) {
         setImageUrl(URL.createObjectURL(selectedImage));
+        console.log(selectedImage)
       }
     }, [selectedImage]);
+
+    const handleSubmit = () => {
+
+      console.log(newImage)
+    }
   
     return (
       <>
@@ -32,8 +40,10 @@ export default function AddImage () {
             <Box mt={2} textAlign="center">
                 <div>Preview:</div>
                 <img src={imageUrl} alt={selectedImage.name} height="150px"/>
+                <Button variant="contained" onSubmit={handleSubmit} color="secondary">Submit</Button>
+                {/* div for progress hook here? also need to call useStorage hook */}
+                
             </Box>
-            <Button variant="outlined" color="secondary">Submit</Button>
             </>
         )}
       </>
