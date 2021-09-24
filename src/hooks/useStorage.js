@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { storage, db } from '../context/AuthContext';
-
+import { storage } from '../context/AuthContext';
+import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage';
 const useStorage = (file) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);

@@ -16,17 +16,28 @@ import Footer from '../Components/LandingPage/Footer/Footer';
 import Paper from '@mui/material/Paper';
 import Apartment from '@mui/icons-material/Apartment';
 import { Divider } from '@mui/material';
+import { useAuth } from '../context/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 export default function SignIn() {
+    const [errorText, setErrorText] = React.useState('')
+    const history = useHistory();
+    const { login } = useAuth();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    
+
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    });
+    try {
+        setErrorText('')
+        await login(data.get('email'), data.get('password'));
+        history.push('/home');
+    } catch {
+        console.log('erro')
+        setErrorText('An Error Occurred')
+    }
+    
   };
 
   return (

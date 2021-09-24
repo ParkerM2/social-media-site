@@ -16,7 +16,7 @@ import Footer from '../Components/LandingPage/Footer/Footer';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import Divider from '@mui/material/Divider';
 import { useAuth } from '../context/AuthContext';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 
 export default function SignUp() {
@@ -27,6 +27,7 @@ export default function SignUp() {
     const history = useHistory();
 
   const handleSubmit = async (event) => {
+    
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -42,9 +43,7 @@ export default function SignUp() {
         setError("")
         setLoading(true)
         await signup(data.get('email'), data.get('password'))
-        setSuccess(true)
-        // put a snackbar popup for success******
-        history.push('/update')
+        history.push('/signin')
     } catch {
         console.log('error hoe')
     }

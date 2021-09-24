@@ -9,7 +9,7 @@ import Home from './Pages/Home';
 import UpdateProfile from './Pages/UpdateProfile';
 import Profile from './Pages/Profile';
 import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import PrivateRoute from './services/PrivateRoute/PrivateRoute';
 
 const font =  "'Quicksand'";
 const theme = createTheme({
@@ -55,7 +55,7 @@ function App() {
               <Home />
             </PrivateRoute>
       
-            <Route path="/profile/:id">
+            <Route exact path="/profile/:id">
               <Profile />
             </Route>
 

@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, sendPasswordResetEmail, setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { getFirestore, setDoc, doc, collection, getDocs,  } from "@firebase/firestore";
+import Firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/firestore';
@@ -26,7 +27,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-export { db, storage};
+export { db, storage, app};
 
 const AuthContext = createContext();
 const auth = getAuth();
@@ -49,6 +50,7 @@ export function AuthProvider({ children }) {
             const user = userCredential.user;
             const userID = user.uid;
             setDoc(doc(db,'users', userID),{uid: userID, email: email,})
+            history.push('/login')
         }).catch((error) => {
             console.log(error)
         })

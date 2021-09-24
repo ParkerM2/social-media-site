@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Grid,
     Typography,
@@ -21,11 +21,50 @@ import Navbar from '../Components/userNavbar/userNavbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
 import doggo from '../images/doggo.JPG';
 import TabController from '../Components/ProfileImageContainer/TabController/TabController';
-
+import { useLocation, Link, useHistory, useParams} from 'react-router-dom';
+import { db } from '../context/AuthContext';
+import { doc, getDoc, setDoc, } from '@firebase/firestore';
 
 
 export default function Profile () {
+    const [userData, setUserData] = useState();
+    const [loading, setLoading] = useState(true);
     const [value, setValue] = useState(0);
+    const { id } = useParams();
+    const [displayName, setDisplayName] = useState();
+    
+    const userRef = doc(db, 'users', id);
+
+    async function getUserData () {
+        try{
+            const userSnapShot = await getDoc(userRef);
+
+            if ( userSnapShot ) {
+                console.log('doc data:', userSnapShot.data());
+                setUserData(userSnapShot.data())
+                setLoading(true)
+            return;
+            } else {
+                // undefined
+                console.log('no user found')
+            }
+
+            if ( userData.displayName !== 'undefined') {
+                setDisplayName(true)
+            } else {
+                setDisplayName(false);
+            }
+        } catch {
+            console.log('error')
+        }
+        return
+    }
+
+    useEffect(() => {
+        getUserData();
+        console.log('use effect fired')
+    }, []);
+
 
     // handle change in tabs for viewing images or saved images
     const handleChange = ( event, newValue) => {
@@ -35,6 +74,7 @@ export default function Profile () {
     return(
         <>
             <Navbar />
+            {loading ? (
                 <Grid container sx={{bgcolor: 'primary.dark', minHeight: '90vh'}} >
                     <Container maxWidth="xs" component="main">
                         <Grid container sx={{paddingTop: 4}} spacing={1} justifyContent="center">
@@ -47,11 +87,18 @@ export default function Profile () {
                                             alt="profile picture"
                                         />
                                         <CardContent sx={{flex: '1 0 auto'}}>
-                                            <Typography component="div" variant="h5">
-                                                Parker Manning
-                                            </Typography>
+                                                {!displayName ? 
+                                                    <Typography variant="p">
+                                                        Name has not been added yet.
+                                                    </Typography>
+                                                 : 
+                                                    <Typography component="div" variant="h5">
+                                                        {userData.displayName}
+                                                    </Typography>
+                                                }
+                        
                                             <Typography sx={{paddingTop: 3}}>
-                                                1 Post 
+                                                {userData.post && userData.post.length} Post
                                             </Typography>
                                             <Typography>
                                                 1 Saved
@@ -72,6 +119,10 @@ export default function Profile () {
                         </Grid>
                     </Container>
                 </Grid>
+            ):
+            (
+            <Typography>Loading</Typography>
+            )}
             <Footer />
         </>
     )
