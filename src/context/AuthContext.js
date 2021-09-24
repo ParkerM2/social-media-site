@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect, createContext } from 'react';
-import { useHistory } from 'react-router';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut, sendPasswordResetEmail, setPersistence, browserSessionPersistence } from 'firebase/auth';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { getFirestore, setDoc, doc, collection, getDocs,  } from "@firebase/firestore";
-import Firebase from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendPasswordResetEmail, setPersistence, browserSessionPersistence } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
+import { getFirestore, setDoc, doc } from "@firebase/firestore";
 import 'firebase/auth';
 import 'firebase/storage';
 import 'firebase/firestore';
@@ -40,19 +38,20 @@ export function useAuth() {
 export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
     const [loading, setLoading] = useState(true);
-    const history = useHistory();
     
 
-    function signup(email, password, firstName, lastName) {
+    function signup(email, password) {
 
         return createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
             // signed in with new user
             const user = userCredential.user;
             const userID = user.uid;
             setDoc(doc(db,'users', userID),{uid: userID, email: email,})
-            history.push('/login')
+
+            return user;
         }).catch((error) => {
             console.log(error)
+            return error;
         })
         
     };
@@ -75,7 +74,7 @@ export function AuthProvider({ children }) {
             const user = userCredential.user;
             return user;
             }).catch((error) => {
-                console.log(error.message)
+                return error.message;
             });
     };
 

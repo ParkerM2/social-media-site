@@ -6,7 +6,6 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from './Pages/SignIn';
 import Home from './Pages/Home';
-import UpdateProfile from './Pages/UpdateProfile';
 import Profile from './Pages/Profile';
 import { AuthProvider } from './context/AuthContext';
 import PrivateRoute from './services/PrivateRoute/PrivateRoute';
@@ -57,10 +56,6 @@ function App() {
       
             <Route exact path="/profile/:id">
               <Profile />
-            </Route>
-
-            <Route path="/update">
-              <UpdateProfile />
             </Route>
           </Switch>
         </Router>

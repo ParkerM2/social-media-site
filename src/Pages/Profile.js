@@ -2,70 +2,58 @@ import React, { useEffect, useState } from 'react';
 import {
     Grid,
     Typography,
-    Button,
-    IconButton,
-    Divider,
     Paper,
-    Box,
     CardContent,
     CardMedia,
     Card,
     Container,
-    Tabs,
-    Tab,
-    CardActions,
-    CardActionArea
 } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Navbar from '../Components/userNavbar/userNavbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
 import doggo from '../images/doggo.JPG';
 import TabController from '../Components/ProfileImageContainer/TabController/TabController';
-import { useLocation, Link, useHistory, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import { db } from '../context/AuthContext';
-import { doc, getDoc, setDoc, } from '@firebase/firestore';
+import { doc, getDoc, } from '@firebase/firestore';
 
 
 export default function Profile () {
     const [userData, setUserData] = useState();
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState();
     const [value, setValue] = useState(0);
     const { id } = useParams();
-    const [displayName, setDisplayName] = useState();
     
     const userRef = doc(db, 'users', id);
 
     async function getUserData () {
+        setLoading(false)
         try{
+
             const userSnapShot = await getDoc(userRef);
 
             if ( userSnapShot ) {
                 console.log('doc data:', userSnapShot.data());
                 setUserData(userSnapShot.data())
-                setLoading(true)
-            return;
             } else {
                 // undefined
                 console.log('no user found')
             }
 
-            if ( userData.displayName !== 'undefined') {
-                setDisplayName(true)
-            } else {
-                setDisplayName(false);
-            }
         } catch {
             console.log('error')
         }
+        setLoading(true)
         return
     }
 
     useEffect(() => {
-        getUserData();
+        const unsub = getUserData();
         console.log('use effect fired')
+
+        return unsub;
     }, []);
 
-
+    // when uid is first put into firestore, other base fields should be created or at least called and created then
     // handle change in tabs for viewing images or saved images
     const handleChange = ( event, newValue) => {
         setValue(newValue);
@@ -87,18 +75,18 @@ export default function Profile () {
                                             alt="profile picture"
                                         />
                                         <CardContent sx={{flex: '1 0 auto'}}>
-                                                {!displayName ? 
+                                                {!userData.username ? 
                                                     <Typography variant="p">
                                                         Name has not been added yet.
                                                     </Typography>
                                                  : 
                                                     <Typography component="div" variant="h5">
-                                                        {userData.displayName}
+                                                        {userData.username}
                                                     </Typography>
                                                 }
                         
                                             <Typography sx={{paddingTop: 3}}>
-                                                {userData.post && userData.post.length} Post
+                                                 Post
                                             </Typography>
                                             <Typography>
                                                 1 Saved
