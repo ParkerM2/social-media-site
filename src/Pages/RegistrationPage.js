@@ -21,11 +21,13 @@ import { db, useAuth } from '../context/AuthContext';
 import { doesUsernameExist } from '../services/firebase/firebase';
 import {doc, setDoc, serverTimestamp} from 'firebase/firestore';
 import {updateProfile, getAuth, signOut} from 'firebase/auth';
+import { useHistory } from 'react-router';
 
 export default function SignUp() {
     const { signup } = useAuth();
     const [error, setError] = React.useState("");
     const [loading, setLoading] = React.useState(false)
+    const history = useHistory();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -55,10 +57,13 @@ export default function SignUp() {
                         emailAddress: data.get('email').toLowerCase(),
                         following: [],
                         followers: [],
+                        photos:[],
                         dateCreated: serverTimestamp()
                     })
                 
                 ));
+                // send user to the home page
+                history.push('/home');
             } catch(error) {
                 setError(error.message)
             }
