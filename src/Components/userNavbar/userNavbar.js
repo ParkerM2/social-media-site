@@ -35,10 +35,7 @@ export default function ButtonAppBar() {
                     >
                         <ApartmentIcon />
                     </IconButton>
-{/* 
-                    <Typography variant="h6" component="div">
-                        Things
-                    </Typography> */}
+                    
                     <div className={classes.toolbarButtons}>
                     <Link style={{textDecoration: 'none'}}  to={{
                             pathname: `/home`
@@ -55,7 +52,6 @@ export default function ButtonAppBar() {
                             <Avatar sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
                         </Link>
-
                     </div>
                 </Toolbar>
             </AppBar>
