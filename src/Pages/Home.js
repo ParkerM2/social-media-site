@@ -12,14 +12,18 @@ const description = "Contrary to popular belisdfsdfsdfsdfsdfsdfs sdfsd s sdf sd 
 // username, userPhoto, displayedImage, description, photoLocation
 
 
-
+// call api to read currentUser's following array
+// forEach in the array and grab their last image
+// while grabbing their last image/userInfo push that into a seperate array
+//  return this array of follwed accounts last images + their respective account info's
+// map over this new array here
 export default function Home () {
 
 
     return (
         <>
         <UserNavBar />
-        <Grid container lg={12} sx={{bgcolor: 'primary.dark', minHeight: '100vh'}}>
+        <Grid justifyContent="center" container lg={12} sx={{bgcolor: 'primary.dark', minHeight: '100vh'}}>
             <Grid item lg={12}>
                 <MainCard 
                     username={"parker manning"}
