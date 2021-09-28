@@ -16,6 +16,8 @@ import TabController from '../Components/ProfileImageContainer/TabController/Tab
 import {useParams} from 'react-router-dom';
 import { db, useAuth } from '../context/AuthContext';
 import { doc, getDoc, } from '@firebase/firestore';
+import UploadImageButton from '../Components/UploadImageButton/UploadImageButton';
+import stockPhoto from '../images/stockphoto.jpg';
 
 
 export default function Profile () {
@@ -55,7 +57,7 @@ export default function Profile () {
     useEffect(() => {
         const unsub = getUserData();
         return unsub;
-    }, []);
+    }, [id]);
 
 
     const handleChange = ( event, newValue) => {
@@ -71,12 +73,21 @@ export default function Profile () {
                         <Grid container sx={{paddingTop: 4}} spacing={1} justifyContent="center">
                             <Grid lg={12} sm={12} item sx={{minWidth: 365}} >
                                 <Card sx={{maxWidth: 400, display: 'flex', bgcolor: 'primary.main', color: 'primary.contrastText'}}>
-                                    <CardMedia
+                                    {userData.userPhoto ?
+                                        <CardMedia
                                             component="img"
                                             sx={{ maxWidth: 151, maxHeight: 200 }}
-                                            image={doggo}
+                                            image={userData.userPhoto}
                                             alt="profile picture"
                                         />
+                                    : 
+                                        <CardMedia
+                                            component="img"
+                                            sx={{ maxWidth: 151, maxHeight: 200 }}
+                                            image={stockPhoto}
+                                            alt="profile picture"
+                                        />
+                                    }
                                         <CardContent sx={{flex: '1 0 auto'}}>
                                                 {!userData.username ? 
                                                     <Typography variant="p">
