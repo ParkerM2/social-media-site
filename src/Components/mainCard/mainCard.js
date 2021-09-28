@@ -8,6 +8,7 @@ import {
     CardMedia,
     IconButton,
     CardContent,
+    Link,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
@@ -16,7 +17,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 export default function MainCard(props) {
 
-    const {username, userPhoto, displayedImage, description, photoLocation} = props;
+    const {username, userPhoto, displayedImage, description, photoLocation, uid} = props;
   return (
       <>
         <Grid sx={{padding: 1}} justifyContent="center" container spacing={1}>
@@ -33,7 +34,11 @@ export default function MainCard(props) {
 
                     <Grid container sx={{padding: '2px'}} flexDirection='row' justifyContent="space-between">
                         <Grid item sx={{padding: '2px'}}>
-                            <Avatar sx={{ width: 44, height: 44, bgcolor: 'secondary.dark', color: 'black'}} src={userPhoto} />
+                                <IconButton href={`/profile/${uid}`}>
+                                    {/* <Link to={{pathname: `/profile/${uid}`}}  style={{textDecoration: 'none', color: 'inherit'}}> */}
+                                        <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.dark', color: 'black'}} src={userPhoto} />
+                                    {/* </Link> */}
+                                </IconButton>
                         </Grid>
 
                         <Grid item flexDirection="column" align="left"> 

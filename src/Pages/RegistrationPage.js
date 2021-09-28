@@ -58,7 +58,8 @@ export default function SignUp() {
                         following: [],
                         followers: [],
                         photos:[],
-                        dateCreated: serverTimestamp()
+                        dateCreated: serverTimestamp(),
+                        uid: user.uid,
                     })
                 
                 ));
