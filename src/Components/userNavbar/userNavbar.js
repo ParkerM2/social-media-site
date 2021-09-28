@@ -21,7 +21,7 @@ const useStyles = makeStyles({
 })
 
 export default function ButtonAppBar() {
-    const {currentUser} = useAuth();
+    const {currentUser, logout} = useAuth();
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -34,6 +34,7 @@ export default function ButtonAppBar() {
     
       setAnchorEl(null);
     };
+
     
   return (
         <Box>
@@ -63,11 +64,19 @@ export default function ButtonAppBar() {
                             <Avatar sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
                             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                                <MenuList >
-                                <MenuItem onClick={handleClose}> Profile </MenuItem>
-                                <MenuItem onClick={handleClose}> Account </MenuItem>
-                                <MenuItem onClick={handleClose}> Logout </MenuItem>
-                                </MenuList>
+
+                                <Link to={{pathname: `/profile/${currentUser.uid}`}}  style={{textDecoration: 'none', color: 'inherit'}}>
+                                    <MenuItem onClick={handleClose}> Profile </MenuItem>
+                                </Link>
+
+                                <Link to={{pathname: `/account`}}  style={{textDecoration: 'none', color: 'inherit'}}>
+                                    <MenuItem onClick={handleClose}> Account </MenuItem>
+                                </Link>
+
+                                <Link to={{pathname: `/`}}  style={{textDecoration: 'none', color: 'inherit'}}>
+                                    <MenuItem onClick={logout}> Logout </MenuItem>
+                                </Link>
+                                
                             </Menu>
                     </div>
                 </Toolbar>
