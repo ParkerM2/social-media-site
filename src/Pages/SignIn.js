@@ -30,8 +30,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     try {
         setErrorText('')
-        await login(data.get('email'), data.get('password'));
-        history.push('/home');
+        await login(data.get('email'), data.get('password'))
     } catch {
         console.log('erro')
         setErrorText('An Error Occurred')
@@ -73,7 +72,7 @@ export default function SignIn() {
                                     <Typography component="h1" variant="h5">
                                         Sign in
                                     </Typography>
-                                    
+
                                     {errorText && 
                                     <Typography component="h1" variant="h5">
                                         {errorText}

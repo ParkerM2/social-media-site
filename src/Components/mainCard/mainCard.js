@@ -9,6 +9,8 @@ import {
     IconButton,
     CardContent,
     Link,
+    Menu,
+    MenuItem,
 } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
@@ -16,8 +18,19 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 export default function MainCard(props) {
-
     const {username, userPhoto, displayedImage, description, photoLocation, uid} = props;
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        console.log('click')
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+    
+      setAnchorEl(null);
+    };
+    
   return (
       <>
         <Grid sx={{padding: 1}} justifyContent="center" container spacing={1}>
@@ -26,7 +39,8 @@ export default function MainCard(props) {
                     sx={{
                         backgroundColor: 'primary.main',
                         height: 575,
-                        maxWidth: 375,
+                        maxWidth: 370,
+                        minWidth: 360
                     }}
                     elevation={16}
                     variant="outlined" 
@@ -52,8 +66,14 @@ export default function MainCard(props) {
 
                         <Grid item>
                             <IconButton>
-                                <MoreVertIcon fontSize="large" color="secondary" />
+                                <MoreVertIcon onClick={handleClick} fontSize="large" color="secondary" />
                             </IconButton>
+
+                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                                <MenuItem onClick={handleClose}> Report </MenuItem>
+                                <MenuItem onClick={handleClose}> Save to Archive </MenuItem>
+                            </Menu>
+
                         </Grid>
                     </Grid>
 
