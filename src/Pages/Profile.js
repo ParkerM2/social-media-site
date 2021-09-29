@@ -70,7 +70,9 @@ export default function Profile () {
             {loading && userData ? (
                 <Grid container sx={{bgcolor: 'primary.dark', minHeight: '90vh'}} >
                     <Container maxWidth="xs" component="main">
-                        <Grid container sx={{paddingTop: 4}} spacing={1} justifyContent="center">
+                        <Grid container sx={{paddingTop: 2}} spacing={1} justifyContent="center">
+                            {userData.fullname ? <Typography color="secondary"> {userData.fullname} </Typography> :
+                            <Typography> No name has been added </Typography>}
                             <Grid lg={12} sm={12} item sx={{minWidth: 365}} >
                                 <Card sx={{maxWidth: 400, display: 'flex', bgcolor: 'primary.main', color: 'primary.contrastText'}}>
                                     {userData.userPhoto ?
@@ -100,13 +102,13 @@ export default function Profile () {
                                                 }
                         
                                             <Typography sx={{paddingTop: 3}}>
-                                                 Post
+                                                {userData.photos.length} Post
                                             </Typography>
                                             <Typography>
                                                 1 Saved
                                             </Typography>
                                             <Typography>
-                                                1 Follower
+                                                {userData.followers.length} Follower
                                             </Typography>
                                         </CardContent>
                                 </Card>

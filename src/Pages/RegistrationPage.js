@@ -44,7 +44,9 @@ export default function SignUp() {
         
             try{
                 const auth = getAuth();
+                // sign out any current users before creating a new signed in user instance
                 signOut(auth);
+
                 await signup(data.get('email'), data.get('password')).then((user) => (
                     // update profile display name
                     updateProfile(user, {
@@ -61,7 +63,6 @@ export default function SignUp() {
                         dateCreated: serverTimestamp(),
                         uid: user.uid,
                     })
-                
                 ));
                 // send user to the home page
                 history.push('/home');

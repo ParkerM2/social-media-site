@@ -52,19 +52,20 @@ export default function ButtonAppBar() {
                     </IconButton>
 
                     <div className={classes.toolbarButtons}>
-                        <Link style={{textDecoration: 'none'}}  to={{
-                                pathname: `/home`
-                            }}>
-                        <Typography variant="h6" sx={{color: 'secondary.main'}}>Dashboard </Typography>
+
+                        <Link style={{textDecoration: 'none'}}  to={{pathname: `/home`}}>
+                            <Typography variant="h6" sx={{color: 'secondary.main'}}>Dashboard </Typography>
                         </Link>
+
                     </div>
                     
                     <div className={classes.toolbarButtons}>
+
                         <IconButton onClick={handleClick} aria-controls="menu" aria-haspopip="true" aria-expanded={open ? 'true' : undefined}>
                             <Avatar sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
-                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
 
+                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                                 <Link to={{pathname: `/profile/${currentUser.uid}`}}  style={{textDecoration: 'none', color: 'inherit'}}>
                                     <MenuItem onClick={handleClose}> Profile </MenuItem>
                                 </Link>
@@ -76,8 +77,8 @@ export default function ButtonAppBar() {
                                 <Link to={{pathname: `/`}}  style={{textDecoration: 'none', color: 'inherit'}}>
                                     <MenuItem onClick={logout}> Logout </MenuItem>
                                 </Link>
-                                
                             </Menu>
+
                     </div>
                 </Toolbar>
             </AppBar>
