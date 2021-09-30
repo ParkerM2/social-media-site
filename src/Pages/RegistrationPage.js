@@ -79,7 +79,7 @@ export default function SignUp() {
         <NavBar />
         <Grid sx={{
                 bgcolor: 'primary.dark', 
-                minHeight: '90vh', 
+                minHeight: '95vh', 
                 position: 'relative',
                 backgroundSize: 'cover', 
                 backgroundPosition: 'center', 

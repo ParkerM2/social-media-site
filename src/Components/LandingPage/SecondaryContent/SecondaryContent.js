@@ -4,7 +4,7 @@ import rockbackground from '../../../images/rockbackground.jpg'
 import MainCard from '../../mainCard/mainCard';
 import boatCardImage from '../../../images/boatpic.jpg';
 import doggo from '../../../images/doggo.JPG';
-const description = "Contrary to popular belisdfsdfsdfsdfsdfsdfs sdfsd s sdf sd sdf sdf sfd sdfsdfsd sdfsdfsd ef, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one"
+const description = "Contrary to popular Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one"
 
 export default function SecondaryContent() {
 

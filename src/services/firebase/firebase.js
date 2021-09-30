@@ -119,11 +119,10 @@ export async function getUserPhotosByUserId(userId) {
 };
 
 // is the user following?
-export async function isUserFollowingProfile(loggedInUserUserName, profileUserId) {
+export async function isUserFollowingProfile(loggedInUserId, profileUserId) {
     
     const q = query(collection(db, 'users'), 
-        where('username', '==', loggedInUserUserName), 
-        where('following', 'array-contains', profileUserId));
+        where('uid', '==', 'NFi1eiBXaAV2TXfbr2RGrQjzVWq1'), where('following', 'array-contains-any', 'u6v8fIeensfONGQTyPMIxWwmeps1'));
 
     const [response = {}] = getDocs(q).docs.map((item) => ({
         ...item.data(),
@@ -133,14 +132,14 @@ export async function isUserFollowingProfile(loggedInUserUserName, profileUserId
     return response.userId;
 };
 
-export async function toggleFollow(
-    isFollowingProfile,
-    activeUserDocId,
-    profileDocId,
-    profileUserId,
-    followingUserId,
-) {
-    await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
+// export async function toggleFollow(
+//     isFollowingProfile,
+//     activeUserDocId,
+//     profileDocId,
+//     profileUserId,
+//     followingUserId,
+// ) {
+//     await updateLoggedInUserFollowing(activeUserDocId, profileUserId, isFollowingProfile);
 
-    await updateFollowedUserFollwers(profileDocId, followingUserId, isFollowingProfile);
-};
+//     await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
+// };
