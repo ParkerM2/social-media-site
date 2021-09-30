@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import LandingPage from './Pages/LandingPage';
 import RegistrationPage from './Pages/RegistrationPage';
+import Account from './Pages/Account';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from './Pages/SignIn';
@@ -52,6 +53,10 @@ function App() {
   
             <PrivateRoute path="/home">
               <Home />
+            </PrivateRoute>
+              
+            <PrivateRoute path="/account">
+              <Account />
             </PrivateRoute>
       
             <Route exact path="/profile/:id">
