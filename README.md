@@ -1,4 +1,4 @@
-<h1 align="center" class="fas fa-microscope">Manning Signs</h1>
+<h1 align="center" class="fas fa-microscope">Things</h1>
 <p align="center">
   <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/ParkerM2/GamesList#readme" target="_blank">
