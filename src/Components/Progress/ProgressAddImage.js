@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import useStorage from '../../hooks/useStorage';
-import { updateDoc, doc } from '@firebase/firestore';
+import { updateDoc, doc, arrayUnion } from '@firebase/firestore';
 import { updateCurrentUser, updateProfile } from '@firebase/auth';
 import { db, useAuth } from '../../context/AuthContext';
 
-const ProgressUpdateUserProfileImage = ({file1 , setFile1}) => {
+const ProgressAddImage = ({file1 , setFile1, description, location}) => {
     const { url, progress } = useStorage(file1);
     const { currentUser } = useAuth();
     const userRef = doc(db, 'users', currentUser.uid)
@@ -12,21 +12,20 @@ const ProgressUpdateUserProfileImage = ({file1 , setFile1}) => {
     useEffect(() => {
         console.log('useEffect on progressupdateuserprofileimage fired')
         if (url) {
-            // update firebase db
+            // update firebase db with new image and image data
             updateDoc(userRef,
-                { userPhoto: url },
+                {
+                    'photos': arrayUnion(
+                    {
+                        url: url,
+                        description: description,
+                        alt: 'image',
+                        location: location,
+                    }
+                )},
                 { merge: true }
-            );
-            // update user auth db
-            updateProfile(currentUser, {
-                photoURL: url
-            }).then(() => {
-                console.log('finito')
-            }).catch((error) => {
-                return error;
-            })
+            )
         }
-
     },[url, setFile1])
 
     return (
@@ -36,4 +35,4 @@ const ProgressUpdateUserProfileImage = ({file1 , setFile1}) => {
 
 
 
-export {ProgressUpdateUserProfileImage};
+export { ProgressAddImage };

@@ -7,26 +7,30 @@ import {
     CardMedia,
     Card,
     Container,
+    TextField,
+    Button,
+    Divider,
 } from '@mui/material';
+import { DropzoneArea } from 'material-ui-dropzone';
 import UserNavbar from '../Components/userNavbar/userNavbar';
 import Navbar from '../Components/LandingPage/Navbar/Navbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
-import doggo from '../images/doggo.JPG';
-import TabController from '../Components/ProfileImageContainer/TabController/TabController';
-import {useParams} from 'react-router-dom';
 import { db, useAuth } from '../context/AuthContext';
-import { doc, getDoc, } from '@firebase/firestore';
-import UploadImageButton from '../Components/UploadImageButton/UploadImageButton';
+import { doc, getDoc, updateDoc, } from '@firebase/firestore';
 import stockPhoto from '../images/stockphoto.jpg';
-
+import { ProgressUpdateUserProfileImage } from '../Components/Progress/ProgressUserPhoto';
+import { updateProfile } from '@firebase/auth';
 
 export default function Account () {
     const [userData, setUserData] = useState();
     const [loading, setLoading] = useState();
     const [value, setValue] = useState(0);
-    const { currentUser } = useAuth();
     const [errorText, setErrorText] = useState('');
-    
+    const { currentUser } = useAuth();
+    const [newFullName, setNewFullName] = useState();
+    const [newUserName, setNewUserName] = useState();
+    const [newImage, setNewImage] = useState();
+    const [file1, setFile1] = useState();
     const userRef = doc(db, 'users', currentUser.uid);
 
     async function getUserData () {
@@ -36,7 +40,6 @@ export default function Account () {
             const userSnapShot = await getDoc(userRef);
 
             if ( userSnapShot.data().uid !== 'undefined' ) {
-                console.log('doc data:', userSnapShot.data());
                 setUserData(userSnapShot.data())
                 setLoading(true)
             } else {
@@ -51,13 +54,43 @@ export default function Account () {
         }
         
         return
-    }
+    };
+
+    const handleImageChange = (event) => {
+        event.preventDefault();
+        console.log(newImage[0], 'value')
+        setFile1(newImage[0])
+    };
 
     useEffect(() => {
         const unsub = getUserData();
         return unsub;
-    }, []);
+    }, []
+    );
 
+    const sendNewName = () => {
+        updateProfile(currentUser, {
+            displayName: newFullName
+        }).then(() => {
+            // set success here
+        }).catch((error) => {
+            // set error here
+        })
+
+        updateDoc(userRef,
+            {
+                'fullname': newFullName
+            },
+        );
+    };
+
+    const sendNewUserName = () => {
+        updateDoc(userRef,
+            {
+                'username': newUserName
+            },
+        );
+    };
 
     const handleChange = ( event, newValue) => {
         setValue(newValue);
@@ -67,11 +100,9 @@ export default function Account () {
         <>
             {currentUser ? <UserNavbar /> : <Navbar />}
             {loading && userData ? (
-                <Grid container sx={{bgcolor: 'primary.dark', minHeight: '95vh'}} >
+                <Grid container sx={{bgcolor: 'primary.dark', minHeight: '95vh', paddingBottom: 6}} >
                     <Container maxWidth="xs" component="main">
                         <Grid container sx={{paddingTop: 2}} spacing={1} justifyContent="center">
-                            {userData.fullname ? <Typography color="secondary"> {userData.fullname} </Typography> :
-                            <Typography> No name has been added </Typography>}
                             <Grid lg={12} sm={12} item sx={{minWidth: 365}} >
                                 <Card sx={{maxWidth: 400, display: 'flex', bgcolor: 'primary.main', color: 'primary.contrastText'}}>
                                     {userData.userPhoto ?
@@ -114,9 +145,47 @@ export default function Account () {
                             </Grid>
 
                             <Grid item lg={12} sm={12} sx={{minWidth: 365, paddingBottom: 5}} flexDirection="column">
-                                <Paper sx={{bgcolor: 'primary.main'}}>
-                                    <Typography color="primary.contrastText"> {userData.fullname}'s Settings </Typography>
+                                <Paper sx={{bgcolor: 'primary.light', color: 'secondary.main', paddingTop: 2}}>
+                                    <Typography sx={{paddingBottom: 1}} color="secondary.main"> {userData.fullname}'s Settings </Typography>
                                     {/* account form here */}
+                                    <Grid container spacing={2} justifyContent="center">
+                                        <Grid item xs={5}>
+                                            <Typography variant="caption">Current Users full name: {userData.fullname}</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField onChange={(event) => {setNewFullName(event.target.value)}} color="secondary" variant="outlined" label="full name"></TextField>
+                                        </Grid>
+                                        <Grid item xs={11}>
+                                            <Button onClick={sendNewName} type="submit" fullWidth variant="contained">Submit New full name</Button>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <Typography variant="caption">Current Users user name: {userData.username}</Typography>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <TextField onChange={(event) => {setNewUserName(event.target.value)}} color="secondary" variant="outlined" label="user name"></TextField>
+                                        </Grid>
+                                        <Grid item xs={11}>
+                                            <Button onClick={sendNewUserName} type="submit" fullWidth variant="contained">Submit New user name</Button>
+                                        </Grid>
+                                        <Grid item xs={5}>
+                                            <Typography variant="caption">Update current user photo:</Typography>
+                                        </Grid>
+                                        <Grid item xs={11} sx={{ paddingBottom: 2 }}>
+                                            <DropzoneArea
+                                                acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
+                                                maxFileSize={5000000}
+                                                filesLimit={1}
+                                                accept="image/jpeg"
+                                                onChange={setNewImage}
+                                                style={{height: 40}}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={11} sx={{paddingBottom: 2}}>
+                                            <Button onClick={handleImageChange} fullWidth component="label" variant="contained"> Submit new Photo
+                                            </Button>
+                                            {file1 && <ProgressUpdateUserProfileImage file1={file1} setFile1={setFile1} />}
+                                        </Grid>
+                                    </Grid>
                                 </Paper>
                             </Grid>
                         </Grid>
@@ -132,7 +201,8 @@ export default function Account () {
                 </>
             )
             }
-            <Footer />
+            <Divider />
+            <Footer/>
         </>
     )
 }

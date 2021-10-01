@@ -23,7 +23,6 @@ export default function MainCard(props) {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        console.log('click')
       setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../context/AuthContext';
 import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage';
+
 const useStorage = (file) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
@@ -10,8 +11,9 @@ const useStorage = (file) => {
         const metadata = {
             contentType: 'image/jpeg'
         };
+        console.log(file, 'file')
         // references => separate images by category = file.list 
-        const storageRef = ref(storage, 'images/' + file.name); 
+        const storageRef = ref(storage, 'photos/' + file.name); 
         const uploadTask = uploadBytesResumable(storageRef, file, metadata);
         // const galleryRef = collection(db, 'gallery');
         // listen for state changes, errors, and completion
@@ -23,10 +25,8 @@ const useStorage = (file) => {
                 
                 switch (snapshot.state) {
                     case 'paused':
-                        console.log('upload is paused')
                         break;
                     case 'running':
-                        console.log('upload is running');
                         break;
                     default:
                         break;
@@ -46,7 +46,6 @@ const useStorage = (file) => {
                     case 'storage/unknown':
                         setError(error)
                         // unknown error occurred
-                        console.log(error.serverResponse)
                         break;
                     default:
                         break;

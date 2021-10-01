@@ -33,7 +33,6 @@ export default function SignIn() {
         await login(data.get('email'), data.get('password'))
         history.push('/home')
     } catch {
-        console.log('erro')
         setErrorText('An Error Occurred')
     }
     
