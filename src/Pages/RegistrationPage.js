@@ -18,8 +18,7 @@ import Footer from '../Components/LandingPage/Footer/Footer';
 import NavBar from '../Components/LandingPage/Navbar/Navbar';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import { db, useAuth } from '../context/AuthContext';
-import { doesUsernameExist } from '../services/firebase/firebase';
-import {doc, setDoc, serverTimestamp} from 'firebase/firestore';
+import {doc, setDoc, serverTimestamp, query, collection, where, getDocs,} from 'firebase/firestore';
 import {updateProfile, getAuth, signOut} from 'firebase/auth';
 import { useHistory } from 'react-router';
 
@@ -29,6 +28,18 @@ export default function SignUp() {
     const [loading, setLoading] = React.useState(false)
     const history = useHistory();
 
+    async function doesUsernameExist (username) {
+
+        // define query params for firestore collection of users
+        const q = query(collection(db, 'users'), where('username', '==', username.toLowerCase()));
+
+        //  await the result from the query snapshot
+        const result = await getDocs(q);
+
+        //  return if the length of the result is over 0 signaling a previous username
+        return result.docs.length > 0;
+    };
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -79,7 +90,7 @@ export default function SignUp() {
         <NavBar />
         <Grid sx={{
                 bgcolor: 'primary.dark', 
-                minHeight: '90vh', 
+                minHeight: '95vh', 
                 position: 'relative',
                 backgroundSize: 'cover', 
                 backgroundPosition: 'center', 

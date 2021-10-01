@@ -8,10 +8,10 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import ImageList from '../ImageList/ImageList';
 import AddImage from '../AddImage/AddImage';
+import { useAuth } from '../../../context/AuthContext';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -46,37 +46,41 @@ function a11yProps(index) {
 export default function BasicTabs( { userData } ) {
   // userData contains whole user obj here ^
   const [value, setValue] = React.useState(0);
+  const { currentUser } = useAuth();
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
     return (
-        <>
-            
-                <Paper sx={{bgcolor: 'primary.main'}}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs
-                        textColor="secondary" 
-                        indicatorColor="secondary" 
-                        value={value} onChange={handleChange} 
-                        centered
-                        >
-                    <Tab sx={{color: 'white'}} label="Images" {...a11yProps(0)} />
-                    <Tab sx={{color: 'white'}} label="Add Images" {...a11yProps(1)} />
-                    {/* <Tab sx={{color: 'white'}} label="Saved" {...a11yProps(1)} /> */}
-                    </Tabs>
-                </Box>
-                <TabPanel value={value} index={0}>
-                {/* pass through src/alt for profile/id:*/}
-                    <ImageList data={userData} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <AddImage />
-                </TabPanel>
-                {/* <TabPanel value={value} index={2}>
-                    <ImageList data={data} />
-                </TabPanel> */}
-                </Paper>
+        <> 
+        <Paper sx={{bgcolor: 'primary.main'}}>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          
+            <Tabs
+              textColor="secondary" 
+              indicatorColor="secondary" 
+              value={value} onChange={handleChange} 
+              centered
+              >
+              <Tab sx={{ color: 'white' }} label="Images" {...a11yProps(0)} />
+               {currentUser.uid === userData.uid ?
+                <Tab sx={{ color: 'white' }} label="Add Images" {...a11yProps(1)} />
+                :
+                null}
+            </Tabs>
+          </Box>
+        
+          <TabPanel value={value} index={0}>
+              <ImageList data={userData} />
+          </TabPanel>
+          {currentUser.uid === userData.uid ?
+            <TabPanel value={value} index={1}>
+              <AddImage />
+            </TabPanel>
+        :
+          null}
+          </Paper>
         </>
     );
 }

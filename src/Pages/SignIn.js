@@ -31,8 +31,8 @@ export default function SignIn() {
     try {
         setErrorText('')
         await login(data.get('email'), data.get('password'))
+        history.push('/home')
     } catch {
-        console.log('erro')
         setErrorText('An Error Occurred')
     }
     
@@ -43,7 +43,7 @@ export default function SignIn() {
         <NavBar />
             <Grid sx={{
                 bgcolor: 'primary.dark', 
-                minHeight: '90vh', 
+                minHeight: '95vh', 
                 position: 'relative',
                 backgroundSize: 'cover', 
                 backgroundPosition: 'center', 
@@ -115,13 +115,8 @@ export default function SignIn() {
                                 Sign In
                                 </Button>
                                 <Grid container>
-                                <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                    Forgot password?
-                                    </Link>
-                                </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
+                                    <Link href="/register" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>

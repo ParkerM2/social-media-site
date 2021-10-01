@@ -23,7 +23,6 @@ export default function MainCard(props) {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        console.log('click')
       setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
@@ -39,8 +38,8 @@ export default function MainCard(props) {
                     sx={{
                         backgroundColor: 'primary.main',
                         height: 575,
-                        maxWidth: 370,
-                        minWidth: 360
+                        maxWidth: 350,
+                        minWidth: 350
                     }}
                     elevation={16}
                     variant="outlined" 
@@ -84,10 +83,10 @@ export default function MainCard(props) {
                     <Grid sx={{paddingTop: '4px', paddingBottom: '4px'}} container justifyContent="center">
                         <Grid item>
                             <CardMedia
-                            sx={{
-                                width: 'auto',
-                                maxHeight: '400px',
-                            }}
+                                sx={{
+                                    width: 300,
+                                    height: 400,
+                                }}
                                 component="img"
                                 image={displayedImage}
                                 title="rocks"

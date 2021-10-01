@@ -27,9 +27,9 @@ export default function ButtonAppBar() {
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
-        console.log('click')
       setAnchorEl(event.currentTarget);
     };
+    
     const handleClose = () => {
     
       setAnchorEl(null);
@@ -62,7 +62,7 @@ export default function ButtonAppBar() {
                     <div className={classes.toolbarButtons}>
 
                         <IconButton onClick={handleClick} aria-controls="menu" aria-haspopip="true" aria-expanded={open ? 'true' : undefined}>
-                            <Avatar sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
+                            <Avatar alt={currentUser.displayName} sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
 
                             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
@@ -85,7 +85,3 @@ export default function ButtonAppBar() {
         </Box>
   );
 }
-
-//                         <Link to={{
-    // pathname: `/profile/${currentUser.uid}`
-// }}>

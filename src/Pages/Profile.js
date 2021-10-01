@@ -11,12 +11,10 @@ import {
 import UserNavbar from '../Components/userNavbar/userNavbar';
 import Navbar from '../Components/LandingPage/Navbar/Navbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
-import doggo from '../images/doggo.JPG';
 import TabController from '../Components/ProfileImageContainer/TabController/TabController';
 import {useParams} from 'react-router-dom';
 import { db, useAuth } from '../context/AuthContext';
 import { doc, getDoc, } from '@firebase/firestore';
-import UploadImageButton from '../Components/UploadImageButton/UploadImageButton';
 import stockPhoto from '../images/stockphoto.jpg';
 
 
@@ -37,7 +35,6 @@ export default function Profile () {
             const userSnapShot = await getDoc(userRef);
 
             if ( userSnapShot.data().uid !== 'undefined' ) {
-                console.log('doc data:', userSnapShot.data());
                 setUserData(userSnapShot.data())
                 setLoading(true)
             } else {
@@ -68,11 +65,9 @@ export default function Profile () {
         <>
             {currentUser ? <UserNavbar /> : <Navbar />}
             {loading && userData ? (
-                <Grid container sx={{bgcolor: 'primary.dark', minHeight: '90vh'}} >
+                <Grid container sx={{bgcolor: 'primary.dark', minHeight: '95vh'}} >
                     <Container maxWidth="xs" component="main">
                         <Grid container sx={{paddingTop: 2}} spacing={1} justifyContent="center">
-                            {userData.fullname ? <Typography color="secondary"> {userData.fullname} </Typography> :
-                            <Typography> No name has been added </Typography>}
                             <Grid lg={12} sm={12} item sx={{minWidth: 365}} >
                                 <Card sx={{maxWidth: 400, display: 'flex', bgcolor: 'primary.main', color: 'primary.contrastText'}}>
                                     {userData.userPhoto ?
@@ -125,9 +120,13 @@ export default function Profile () {
             ):
             (
                 <>
-                {!errorText ? 
-                <Typography variant="h4">Loading...</Typography> :
-                <Typography variant="h6">{errorText}</Typography>
+                        {!errorText ?
+                        <Grid container justifyContent="center" sx={{bgcolor: 'primary.dark', minHeight: '95vh'}}>
+                            <Typography color="secondary" variant="h5">Loading...</Typography>
+                        </Grid>
+                        :
+                                <Typography variant="h2">{errorText}</Typography>
+                
                 }
                 </>
             )
