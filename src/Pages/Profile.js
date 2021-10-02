@@ -125,7 +125,7 @@ export default function Profile () {
                             <Typography color="secondary" variant="h5">Loading...</Typography>
                         </Grid>
                         :
-                                <Typography variant="h2">{errorText}</Typography>
+                        <Typography variant="h2">{errorText}</Typography>
                 
                 }
                 </>

@@ -11,7 +11,6 @@ const useStorage = (file) => {
         const metadata = {
             contentType: 'image/jpeg'
         };
-        console.log(file, 'file')
         // references => separate images by category = file.list 
         const storageRef = ref(storage, 'photos/' + file.name); 
         const uploadTask = uploadBytesResumable(storageRef, file, metadata);

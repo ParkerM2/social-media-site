@@ -44,19 +44,19 @@ export default function Home () {
                 {!loading && currentList ? 
                 // <h1 color="secondary.main">hi</h1>
                     currentList.map((user) => (
-                    user.photos[0] ? 
+                    user.photos[0] ? user.photos.map((photo) => (
                         <MainCard
                             key={user.uid}
                             username={user.username}
                             userPhoto={user.userPhoto}
-                            displayedImage={user.photos[0].url}
-                            description={user.photos[0].description}
-                            photoLocation={user.photos[0].date}
+                            displayedImage={photo.url}
+                            description={photo.description}
+                            photoLocation={''}
                             uid={user.uid}
-                        />
+                        />))
                     :
                         null
-                        
+                    
                 ))
                 : <Typography color="secondary">Loading ya stuffz . . .</Typography> }
             </Grid>
