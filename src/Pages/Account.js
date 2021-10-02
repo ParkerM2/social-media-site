@@ -57,8 +57,6 @@ export default function Account () {
     };
 
     const handleImageChange = (event) => {
-        event.preventDefault();
-        console.log(newImage[0], 'value')
         setFile1(newImage[0])
     };
 
@@ -90,10 +88,6 @@ export default function Account () {
                 'username': newUserName
             },
         );
-    };
-
-    const handleChange = ( event, newValue) => {
-        setValue(newValue);
     };
 
     return(

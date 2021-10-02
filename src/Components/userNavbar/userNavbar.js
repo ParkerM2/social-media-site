@@ -8,10 +8,9 @@ import Menu from '@mui/material/Menu';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import {makeStyles} from '@mui/styles';
 import Avatar from '@mui/material/Avatar';
-import userPhoto from '../../images/doggo.JPG';
 import { useAuth } from '../../context/AuthContext';
 import {Link} from 'react-router-dom';
-import { MenuItem, MenuList } from '@mui/material';
+import { MenuItem } from '@mui/material';
 
 const useStyles = makeStyles({
     toolbarButtons: {
@@ -62,7 +61,7 @@ export default function ButtonAppBar() {
                     <div className={classes.toolbarButtons}>
 
                         <IconButton onClick={handleClick} aria-controls="menu" aria-haspopip="true" aria-expanded={open ? 'true' : undefined}>
-                            <Avatar alt={currentUser.displayName} sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
+                            <Avatar sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
 
                             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
