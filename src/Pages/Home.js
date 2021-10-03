@@ -39,28 +39,29 @@ export default function Home () {
     return (
         <>
         <UserNavBar />
-        <Grid justifyContent="center" flexDirection="column" container lg={12} sx={{bgcolor: 'primary.dark', minHeight: '100vh'}}>
-            <Grid item lg={12}>
+        <Grid justifyContent="space-around" container lg={12} sx={{bgcolor: 'primary.dark', minHeight: '100vh'}}>
+            
                 {!loading && currentList ? 
-                // <h1 color="secondary.main">hi</h1>
                     currentList.map((user) => (
                     user.photos[0] ? user.photos.map((photo) => (
-                        <MainCard
-                            key={user.uid}
-                            username={user.username}
-                            userPhoto={user.userPhoto}
-                            displayedImage={photo.url}
-                            description={photo.description}
-                            photoLocation={''}
-                            uid={user.uid}
-                        />))
+                        <Grid item lg={3}>
+                            <MainCard
+                                key={user.uid}
+                                username={user.username}
+                                userPhoto={user.userPhoto}
+                                displayedImage={photo.url}
+                                description={photo.description}
+                                photoLocation={''}
+                                uid={user.uid}
+                                />
+                        </Grid>
+                    ))
                     :
-                        null
-                    
+                    null        
                 ))
-                : <Typography color="secondary">Loading ya stuffz . . .</Typography> }
+                : <Typography sx={{padding: 4}} color="secondary" variant="h3">Loading Images . . .</Typography> }
             </Grid>
-            </Grid>
+            
             <Footer />
         </>
     )

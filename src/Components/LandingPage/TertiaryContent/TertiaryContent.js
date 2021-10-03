@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     Typography,
     Box,
@@ -32,7 +32,9 @@ const handleSubmit = (event) => {
   };
 
 
-export default function ThirdContent () {
+export default function ThirdContent() {
+    const [loading, setLoading] = useState();
+    const [error, setError] = useState();
 
     return (
             <>
@@ -50,113 +52,123 @@ export default function ThirdContent () {
                     paddingTop: '5vh'
                 }}>
                     <Box>
-    
-                        <Grid container sx={{padding: 6}} spacing={1}>
-                            <Grid item xs={12} sm={12} lg={12}>
-                                <Typography color="secondary.main" align="left" variant="h2" marked="center"> Register to do your own Thing </Typography>
-                            </Grid>
-                            <Grid item xs={10} sm={10} lg={12}>
-                                <Typography color="secondary.main" align="left" variant="h6" marked="center">an account is needed to post and view things</Typography>
-                            </Grid>
+
+            <Grid container sx={{padding: 6}} spacing={1}>
+                <Grid item xs={12} sm={12} lg={12}>
+                    <Typography color="secondary.main" align="left" variant="h2" marked="center"> Register to do your own Thing </Typography>
+                </Grid>
+                <Grid item xs={10} sm={10} lg={12}>
+                    <Typography color="secondary.main" align="left" variant="h6" marked="center">an account is needed to post and view things</Typography>
+                </Grid>
+            </Grid>
+
+            <Grid container justifyContent="center" sx={{padding: 2}} spacing={1}>
+                <Grid justifyContent="center" sx={{marginTop: 12, maxWidth: 500}} item lg={4}>
+                    <Paper elevation={18} sx={{padding: 2, bgcolor: 'primary.main'}}>
+                        <Typography variant="h4" color="secondary.dark">Register :</Typography>
+                        <Typography color="secondary.dark">With an account you can view and post things</Typography>
+                        <Typography color="secondary.dark">Accounts are free and supported with google firebase</Typography>
+                    </Paper>
+                </Grid>
+                <Grid item lg={4}>
+                        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+            sx={{
+                paddingTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+            >
+            <Paper square variant="outlined" sx={{bgcolor: 'white', color: 'primary.dark', padding: 4}}>
+                <Grid container justifyContent="center">
+                    <Grid item align="center">
+                        <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
+                            <ApartmentIcon />
+                        </Avatar>
+                        <Typography component="h1" variant="h5">
+                            Sign up
+                        </Typography>
+                    </Grid>
+                </Grid>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    {error && <Typography variant="p"> {error} </Typography>}
+                    <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            id="userName"
+                            label="UserName"
+                            name="userName"
+                            />
                         </Grid>
-    
-                        <Grid container justifyContent="center" sx={{padding: 2}} spacing={1}>
-                            <Grid justifyContent="center" sx={{marginTop: 12, maxWidth: 500}} item lg={4}>
-                                <Paper elevation={18} sx={{padding: 2, bgcolor: 'primary.main'}}>
-                                    <Typography variant="h4" color="secondary.dark">Register :</Typography>
-                                    <Typography color="secondary.dark">With an account you can view and post things</Typography>
-                                    <Typography color="secondary.dark">Accounts are free and suported with google firebase</Typography>
-                                </Paper>
-                            </Grid>
-                            <Grid item lg={4}>
-                            <Container component="main" maxWidth="xs">
-                                <CssBaseline />
-                                <Box
-                                sx={{
-                                    paddingTop: 2,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'center',
-                                }}
-                                >
-                                <Paper elevation={12} sx={{bgcolor: 'primary.contrastText', color: 'secondary.dark', padding: 2}}>
-                                    <Grid container justifyContent="center">
-                                        <Grid item align="center">
-                                            <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
-                                                <ApartmentIcon />
-                                            </Avatar>
-                                            <Typography component="h1" variant="h5">
-                                                Sign up
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                                        <Grid container spacing={2}>
-                                            <Grid item xs={12} sm={6}>
-                                                <TextField
-                                                autoComplete="first name"
-                                                name="firstName"
-                                                required
-                                                fullWidth
-                                                id="firstName"
-                                                label="First Name"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12} sm={6}>
-                                                <TextField
-                                                required
-                                                fullWidth
-                                                id="lastName"
-                                                label="Last Name"
-                                                name="lastName"
-                                                autoComplete="last name"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                required
-                                                fullWidth
-                                                id="email"
-                                                label="Email Address"
-                                                name="email"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <TextField
-                                                required
-                                                fullWidth
-                                                name="password"
-                                                label="Password"
-                                                type="password"
-                                                id="password"
-                                                />
-                                            </Grid>
-                                            <Grid item xs={12}>
-                                                <FormControlLabel
-                                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                                label="I want to receive things via email."
-                                                />
-                                            </Grid>
-                                        </Grid>
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{ mt: 3, mb: 2 }}
-                                                >
-                                                Sign Up
-                                            </Button>
-                                        <Grid container justifyContent="flex-end">
-                                            <Grid item>
-                                                <Link href="/signin" variant="body2">
-                                                Already have an account? Sign in
-                                                </Link>
-                                            </Grid>
-                                        </Grid>
-                                        </Box>
-                                    </Paper>
-                                </Box>
-                            </Container>
+                        <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            id="fullName"
+                            label="Full Name"
+                            name="fullName"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                            required
+                            fullWidth
+                            name="confirmPassword"
+                            label="Confirm Password"
+                            type="password"
+                            id="confirmPassword"
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <FormControlLabel
+                            control={<Checkbox value="allowExtraEmails" color="primary" />}
+                            label="I want to receive things via email."
+                            />
+                        </Grid>
+                    </Grid>
+                        <Button
+                            disabled={loading}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                            >
+                            Sign Up
+                        </Button>
+                    <Grid container justifyContent="flex-end">
+                        <Grid item>
+                            <Link href="/signin" variant="body2">
+                            Already have an account? Sign in
+                            </Link>
+                        </Grid>
+                    </Grid>
+                    </Box>
+                </Paper>
+            </Box>
+        </Container>
                             </Grid>
                         </Grid>
                     </Box>

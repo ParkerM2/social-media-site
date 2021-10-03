@@ -31,7 +31,7 @@ export default function SignIn() {
     try {
         setErrorText('')
         await login(data.get('email'), data.get('password'))
-        history.push('/home')
+        // set success here so user can go to home page
     } catch {
         setErrorText('An Error Occurred')
     }

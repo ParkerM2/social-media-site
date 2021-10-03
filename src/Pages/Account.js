@@ -187,11 +187,15 @@ export default function Account () {
                 </Grid>
             ):
             (
-                <>
-                {!errorText ? 
-                <Typography variant="h4">Loading...</Typography> :
-                <Typography variant="h6">{errorText}</Typography>
-                }
+                    <>
+            <Grid justifyContent="center" container sx={{minHeight: '95vh', bgcolor: 'primary.dark', color: 'secondary.dark'}}>
+            {!errorText ?
+                <Typography variant="h3">Loading Account Page . . . </Typography>
+               
+            :
+                <Typography color="secondary.dark" variant="h6">{errorText}</Typography>
+            }
+            </Grid>
                 </>
             )
             }

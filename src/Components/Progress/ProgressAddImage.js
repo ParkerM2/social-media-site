@@ -13,12 +13,12 @@ const ProgressAddImage = ({file1 , setFile1, description}) => {
         console.log('useEffect on progressupdateuserprofileimage fired')
         if (url) {
             // update firebase db with new image and image data
-           updateDoc(userRef,
+           setDoc(userRef,
                 {
                     'photos': arrayUnion(
                     {
                         url: url,
-                        description: 'description',
+                        description: '' + description + '',
                         alt: 'image',
                     }
                 )},

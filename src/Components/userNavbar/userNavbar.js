@@ -38,7 +38,7 @@ export default function ButtonAppBar() {
   return (
         <Box>
             <AppBar position="static">
-                <Toolbar variant="dense">
+                <Toolbar variant="regular">
                     <IconButton
                         size="large"
                         edge="start"
@@ -61,7 +61,7 @@ export default function ButtonAppBar() {
                     <div className={classes.toolbarButtons}>
 
                         <IconButton onClick={handleClick} aria-controls="menu" aria-haspopip="true" aria-expanded={open ? 'true' : undefined}>
-                            <Avatar sx={{ width: 30, height: 30, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
+                            <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
                         </IconButton>
 
                             <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

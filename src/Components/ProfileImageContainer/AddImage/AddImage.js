@@ -15,8 +15,8 @@ export default function AddImage () {
 
   const handleImageChange = (event) => {
     event.preventDefault();
-    setFile1(newImage[0])
-    setNewDescription(description);
+    setNewDescription(description.target.value)
+    setFile1(newImage[0]);
   };
 
   return (
@@ -26,7 +26,7 @@ export default function AddImage () {
             <Typography variant="subtitle1"> Image description : </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Input onChange={setDescription} style={{backgroundColor: 'secondary', color: 'white'}} color="secondary" variant="filled"> Image description : </Input>
+            <TextField onChange={setDescription} style={{backgroundColor: 'secondary', color: 'white'}} color="secondary" variant="filled"> Image description : </TextField>
           </Grid>
           <Grid item xs={11} sx={{paddingBottom: 2, color: 'secondary.main' }}>
             <DropzoneArea

@@ -109,7 +109,7 @@ export default function SignUp() {
                 alignItems: 'center',
             }}
             >
-            <Paper square variant="outlined" sx={{bgcolor: 'white', color: 'secondary', padding: 4}}>
+            <Paper square variant="outlined" sx={{bgcolor: 'white', color: 'primary.dark', padding: 4}}>
                 <Grid container justifyContent="center">
                     <Grid item align="center">
                         <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
