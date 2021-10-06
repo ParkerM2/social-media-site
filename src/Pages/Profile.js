@@ -122,7 +122,7 @@ export default function Profile () {
                 <>
                         {!errorText ?
                         <Grid container justifyContent="center" sx={{bgcolor: 'primary.dark', minHeight: '95vh'}}>
-                            <Typography color="secondary" variant="h5">Loading...</Typography>
+                            <Typography color="secondary" variant="h5">Loading Profile . . . </Typography>
                         </Grid>
                         :
                         <Typography variant="h2">{errorText}</Typography>
