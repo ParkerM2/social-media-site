@@ -38,13 +38,13 @@ export default function Profile () {
                 setUserData(userSnapShot.data())
                 setLoading(true)
             } else {
-                // set error to show an user profile not found screen <<-
-                console.log('no user found')
+                setErrorText('User Not Fount')
+                return
             }
 
         } catch {
             setLoading()
-            setErrorText('yo error')
+            setErrorText('Error: Profile Not Found')
             return 
         }
         
@@ -61,15 +61,15 @@ export default function Profile () {
         setValue(newValue);
     };
 
-    return(
+    return (
         <>
             {currentUser ? <UserNavbar /> : <Navbar />}
             {loading && userData ? (
-                <Grid container sx={{bgcolor: 'primary.dark', minHeight: '95vh'}} >
+                <Grid container sx={{ bgcolor: 'primary.dark', minHeight: '95vh' }} >
                     <Container maxWidth="xs" component="main">
-                        <Grid container sx={{paddingTop: 2}} spacing={1} justifyContent="center">
-                            <Grid lg={12} sm={12} item sx={{minWidth: 365}} >
-                                <Card sx={{maxWidth: 400, display: 'flex', bgcolor: 'primary.main', color: 'primary.contrastText'}}>
+                        <Grid container sx={{ paddingTop: 2 }} spacing={1} justifyContent="center">
+                            <Grid lg={12} sm={12} item sx={{ minWidth: 365 }} >
+                                <Card sx={{ maxWidth: 400, display: 'flex', bgcolor: 'primary.main', color: 'primary.contrastText' }}>
                                     {userData.userPhoto ?
                                         <CardMedia
                                             component="img"
@@ -77,7 +77,7 @@ export default function Profile () {
                                             image={userData.userPhoto}
                                             alt="profile picture"
                                         />
-                                    : 
+                                        :
                                         <CardMedia
                                             component="img"
                                             sx={{ maxWidth: 151, maxHeight: 200 }}
@@ -85,31 +85,31 @@ export default function Profile () {
                                             alt="profile picture"
                                         />
                                     }
-                                        <CardContent sx={{flex: '1 0 auto'}}>
-                                                {!userData.username ? 
-                                                    <Typography variant="p">
-                                                        Name has not been added yet.
-                                                    </Typography>
-                                                 : 
-                                                    <Typography component="div" variant="h5">
-                                                        {userData.username}
-                                                    </Typography>
-                                                }
+                                    <CardContent sx={{ flex: '1 0 auto' }}>
+                                        {!userData.username ?
+                                            <Typography variant="p">
+                                                Name has not been added yet.
+                                            </Typography>
+                                            :
+                                            <Typography component="div" variant="h5">
+                                                {userData.username}
+                                            </Typography>
+                                        }
                         
-                                            <Typography sx={{paddingTop: 3}}>
-                                                {userData.photos.length} Post
-                                            </Typography>
-                                            <Typography>
-                                                1 Saved
-                                            </Typography>
-                                            <Typography>
-                                                {userData.followers.length} Follower
-                                            </Typography>
-                                        </CardContent>
+                                        <Typography sx={{ paddingTop: 3 }}>
+                                            {userData.photos.length} Post
+                                        </Typography>
+                                        <Typography>
+                                            1 Saved
+                                        </Typography>
+                                        <Typography>
+                                            {userData.followers.length} Follower
+                                        </Typography>
+                                    </CardContent>
                                 </Card>
                             </Grid>
 
-                            <Grid item lg={12} sm={12} sx={{minWidth: 365, paddingBottom: 5}} flexDirection="column">
+                            <Grid item lg={12} sm={12} sx={{ minWidth: 365, paddingBottom: 5 }} flexDirection="column">
                                 <Paper>
                                     <TabController userData={userData} value={value} onChange={handleChange} />
                                 </Paper>
@@ -117,21 +117,23 @@ export default function Profile () {
                         </Grid>
                     </Container>
                 </Grid>
-            ):
-            (
-                <>
+            ) :
+                (
+                    <>
                         {!errorText ?
-                        <Grid container justifyContent="center" sx={{bgcolor: 'primary.dark', minHeight: '95vh'}}>
-                            <Typography color="secondary" variant="h5">Loading Profile . . . </Typography>
-                        </Grid>
-                        :
-                        <Typography variant="h2">{errorText}</Typography>
+                            <Grid container justifyContent="center" sx={{ bgcolor: 'primary.dark', minHeight: '95vh' }}>
+                                <Typography color="secondary" variant="h5">Loading Profile . . . </Typography>
+                            </Grid>
+                            :
+                            <Grid container justifyContent="center" sx={{ bgcolor: 'primary.dark', minHeight: '95vh' }}>
+                                <Typography color="secondary" variant="h2">{errorText}</Typography>
+                            </Grid>
                 
-                }
-                </>
-            )
+                        }
+                    </>
+                )
             }
             <Footer />
         </>
-    )
-}
+    );
+};

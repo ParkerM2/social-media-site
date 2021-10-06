@@ -22,5 +22,5 @@ export default function MasonryImageList( { data } ) {
       </ImageList>
     </Box>
   );
-}
+};
 

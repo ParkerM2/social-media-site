@@ -11,7 +11,6 @@ const ProgressAddImage = ({ file1, setFile1, description }) => {
     const userRef = doc(db, 'users', currentUser.uid)
 
     useEffect(() => {
-        console.log('useEffect on progressupdateuserprofileimage fired')
         if (url) {
             // update firebase db with new image and image data
             setDoc(userRef,
@@ -26,6 +25,9 @@ const ProgressAddImage = ({ file1, setFile1, description }) => {
                 },
                 { merge: true }
             )
+        } else {
+            setErrorMessage('An Error has occurred')
+            setError(true)
         }
     }, [url, setFile1])
 

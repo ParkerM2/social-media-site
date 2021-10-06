@@ -11,11 +11,11 @@ export default function SecondaryContent() {
     return (
         <>
             <Box id="secondaryContent" sx={{
-                minHeight: '80vh', 
+                minHeight: '80vh',
                 position: 'flex',
                 backgroundSize: 'cover',
-                backgroundImage: `url(${rockbackground})`, 
-                backgroundPosition: 'center', 
+                backgroundImage: `url(${rockbackground})`,
+                backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 objectFit: 'cover',
                 paddingBottom: '5vh',
@@ -24,7 +24,7 @@ export default function SecondaryContent() {
             }}>
                 <Box>
 
-                    <Grid container sx={{padding: 6}} spacing={1}>
+                    <Grid container sx={{ padding: 6 }} spacing={1}>
                         <Grid item xs={12} sm={12} lg={12}>
                             <Typography color="secondary.main" align="left" variant="h2" marked="center"> What is a Thing? </Typography>
                         </Grid>
@@ -33,20 +33,20 @@ export default function SecondaryContent() {
                         </Grid>
                     </Grid>
 
-                    <Grid container justifyContent="center" sx={{paddingLeft: 0}} spacing={3}>
-                        <Grid justifyContent="center" sx={{marginTop: 20, maxWidth: 500}} item lg={4}>
-                            <Paper elevation={18} sx={{padding: 2, bgcolor: 'primary.main'}}>
+                    <Grid container justifyContent="center" sx={{ paddingLeft: 0 }} spacing={3}>
+                        <Grid justifyContent="center" sx={{ marginTop: 20, maxWidth: 500 }} item lg={4}>
+                            <Paper elevation={18} sx={{ padding: 2, bgcolor: 'primary.main' }}>
                                 <Typography variant="h4" color="secondary.dark">Things :</Typography>
                                 <Typography color="secondary.dark">Use your profile to post things</Typography>
                                 <Typography color="secondary.dark">Each thing contains a picture and description</Typography>
                             </Paper>
                         </Grid>
-                    {/* {username, userPhoto, displayedImage, description, photoLocation} */}
+                        {/* {username, userPhoto, displayedImage, description, photoLocation} */}
                     
                         <Grid item lg={4}>
-                            <MainCard 
-                                username={"Parker Manning"} 
-                                userPhoto={doggo} 
+                            <MainCard
+                                username={"Parker Manning"}
+                                userPhoto={doggo}
                                 displayedImage={boatCardImage}
                                 description={description}
                                 photoLocation={"Greenville, Ms"}
@@ -56,5 +56,5 @@ export default function SecondaryContent() {
                 </Box>
             </Box>
         </>
-    )
-}
+    );
+};

@@ -3,6 +3,7 @@ import useStorage from '../../hooks/useStorage';
 import { updateDoc, doc } from '@firebase/firestore';
 import { updateProfile } from '@firebase/auth';
 import { db, useAuth } from '../../context/AuthContext';
+import { useHistory } from 'react-router';
 
 const ProgressUpdateUserProfileImage = ({ file1, setFile1 }) => {
     const { url, progress } = useStorage(file1);
@@ -10,11 +11,11 @@ const ProgressUpdateUserProfileImage = ({ file1, setFile1 }) => {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [finishedMessage, setFinishedMessage] = useState();
+    const history = useHistory();
     const userRef = doc(db, 'users', currentUser.uid)
 
 
     useEffect(() => {
-        console.log('useEffect on progressupdateuserprofileimage fired')
         setFinishedMessage('')
         if (url) {
             // update firebase db
@@ -27,6 +28,7 @@ const ProgressUpdateUserProfileImage = ({ file1, setFile1 }) => {
                 photoURL: url
             }).then(() => {
                 setFinishedMessage('Finished')
+                history.go(0)
             }).catch((error) => {
                 setErrorMessage(error)
                 return setError(true);

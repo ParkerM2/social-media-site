@@ -36,39 +36,39 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <LandingPage />
-            </Route>
+        <AuthProvider>
+          <Router>
+            <Switch>
+              <Route exact path="/">
+                <LandingPage />
+              </Route>
             
-            <Route path="/register">
-              <RegistrationPage />
-            </Route>
+              <Route path="/register">
+                <RegistrationPage />
+              </Route>
 
-            <Route path="/signin">
-              <SignIn />
-            </Route>
+              <Route path="/signin">
+                <SignIn />
+              </Route>
   
-            <PrivateRoute path="/home">
-              <Home />
-            </PrivateRoute>
+              <PrivateRoute path="/home">
+                <Home />
+              </PrivateRoute>
               
-            <PrivateRoute path="/account">
-              <Account />
-            </PrivateRoute>
+              <PrivateRoute path="/account">
+                <Account />
+              </PrivateRoute>
       
-            <Route exact path="/profile/:id">
-              <Profile />
-            </Route>
-          </Switch>
-        </Router>
+              <Route exact path="/profile/:id">
+                <Profile />
+              </Route>
+            </Switch>
+          </Router>
         </AuthProvider>
       </ThemeProvider>
       
     </div>
   );
-}
+};
 
 export default App;

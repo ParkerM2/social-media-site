@@ -5,7 +5,6 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import ImageList from '../ImageList/ImageList';
 import AddImage from '../AddImage/AddImage';
 import { useAuth } from '../../../context/AuthContext';

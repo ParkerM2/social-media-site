@@ -1,42 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { 
     Typography,
     Box,
     Grid,
     Paper,
-    Container,
-    TextField,
     Divider,
-    FormControlLabel,
-    Checkbox,
-    Link,
-    CssBaseline,
-    Button,
-    Avatar,
 } from '@mui/material';
-import ApartmentIcon from '@mui/icons-material/Apartment';
 import desertbackground from '../../../images/desertbackground.jpg';
 import RegistrationBox from '../../RegistrationBox/RegistrationBox';
 
 
-
-const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
-
-
 export default function ThirdContent() {
-    const [loading, setLoading] = useState();
-    const [error, setError] = useState();
-
     return (
         <>
             <Divider />

@@ -71,27 +71,30 @@ export default function RegistrationBox() {
                     // update profile display name
                     updateProfile(user, {
                         displayName: data.get('userName')
-                    }),
-                    //  add user data and structure to firestore collection
-                    setDoc(doc(db, 'users', user.uid), {
-                        username: data.get('userName').toLowerCase(),
-                        fullname: data.get('fullName'),
-                        emailAddress: data.get('email').toLowerCase(),
-                        following: [],
-                        followers: [],
-                        photos: [],
-                        dateCreated: serverTimestamp(),
-                        uid: user.uid,
+                    }).then(() => {
+                        //  add user data and structure to firestore collection
+                        setDoc(doc(db, 'users', user.uid), {
+                            username: data.get('userName').toLowerCase(),
+                            fullname: data.get('fullName'),
+                            emailAddress: data.get('email').toLowerCase(),
+                            following: [],
+                            followers: [],
+                            photos: [],
+                            dateCreated: serverTimestamp(),
+                            uid: user.uid,
+                        })
                     })
                 ));
                 // send user to the home page
-                // history.push('/home');
+                history.push('/home');
             } catch (error) {
                 setError(error.message)
+                return;
             }
             setLoading(false)
         } else {
             setError('That Username is already taken');
+            return;
         }
     }
 
