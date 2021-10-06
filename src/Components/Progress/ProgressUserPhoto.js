@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useStorage from '../../hooks/useStorage';
 import { updateDoc, doc } from '@firebase/firestore';
-import { updateCurrentUser, updateProfile } from '@firebase/auth';
+import { updateProfile } from '@firebase/auth';
 import { db, useAuth } from '../../context/AuthContext';
 
 const ProgressUpdateUserProfileImage = ({ file1, setFile1 }) => {
