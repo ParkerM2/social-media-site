@@ -23,47 +23,48 @@ export default function SignIn() {
     const history = useHistory();
     const { login } = useAuth();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
     
-
-    const data = new FormData(event.currentTarget);
-    try {
-        setErrorText('')
-        await login(data.get('email'), data.get('password'))
-        // set success here so user can go to home page
-    } catch {
-        setErrorText('An Error Occurred')
-    }
+        const data = new FormData(event.currentTarget);
+        try {
+            setErrorText('')
+            await login(data.get('email'), data.get('password'))
+            // set success here so user can go to home page
+        } catch {
+            setErrorText('An Error Occurred')
+            return;
+        }
     
-  };
+        history.push('/home')
+    };
 
-  return (
-    <> 
-        <NavBar />
+    return (
+        <>
+            <NavBar />
             <Grid sx={{
-                bgcolor: 'primary.dark', 
-                minHeight: '95vh', 
+                bgcolor: 'primary.dark',
+                minHeight: '95vh',
                 position: 'relative',
-                backgroundSize: 'cover', 
-                backgroundPosition: 'center', 
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
                 objectFit: 'cover',
                 textAlign: 'left',
                 paddingBottom: 8
-                }}>
-                    <Container component="main" maxWidth="xs">
-                        <CssBaseline />
-                        <Box
+            }}>
+                <Container component="main" maxWidth="xs">
+                    <CssBaseline />
+                    <Box
                         sx={{
                             paddingTop: 8,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                         }}
-                        >
+                    >
 
-                        <Paper square variant="outlined" sx={{bgcolor: 'white', color: 'secondary', padding: 4}}>
+                        <Paper square variant="outlined" sx={{ bgcolor: 'white', color: 'secondary', padding: 4 }}>
                             <Grid container justifyContent="center">
                                 <Grid item align="center">
                                     <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
@@ -73,61 +74,61 @@ export default function SignIn() {
                                         Sign in
                                     </Typography>
 
-                                    {errorText && 
-                                    <Typography component="h1" variant="h5">
-                                        {errorText}
-                                    </Typography>
+                                    {errorText &&
+                                        <Typography component="h1" variant="h5">
+                                            {errorText}
+                                        </Typography>
                                     }
                                 </Grid>
                             </Grid>
 
                             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                                 <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="email"
-                                label="Email Address"
-                                name="email"
-                                autoComplete="email"
-                                autoFocus
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="email"
+                                    label="Email Address"
+                                    name="email"
+                                    autoComplete="email"
+                                    autoFocus
                                 />
                                 <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type="password"
-                                id="password"
-                                autoComplete="current-password"
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
                                 />
                                 <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
+                                    control={<Checkbox value="remember" color="primary" />}
+                                    label="Remember me"
                                 />
                                 <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
                                 >
-                                Sign In
+                                    Sign In
                                 </Button>
                                 <Grid container>
-                                <Grid item>
-                                    <Link href="/register" variant="body2">
-                                    {"Don't have an account? Sign Up"}
-                                    </Link>
-                                </Grid>
+                                    <Grid item>
+                                        <Link href="/register" variant="body2">
+                                            {"Don't have an account? Sign Up"}
+                                        </Link>
+                                    </Grid>
                                 </Grid>
                             </Box>
                         </Paper>
-                        </Box>
-                    </Container>
+                    </Box>
+                </Container>
             </Grid>
             <Divider />
-        <Footer />
-    </>
-  );
-}
+            <Footer />
+        </>
+    );
+};

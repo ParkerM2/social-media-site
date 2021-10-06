@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import {makeStyles} from '@mui/styles';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
     toolbarButtons: {
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 export default function ButtonAppBar() {
     const classes = useStyles();
-  return (
+    return (
         <Box>
             <AppBar position="static">
                 <Toolbar variant="dense">
@@ -44,5 +44,5 @@ export default function ButtonAppBar() {
                 </Toolbar>
             </AppBar>
         </Box>
-  );
-}
+    );
+};

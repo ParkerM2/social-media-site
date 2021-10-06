@@ -35,7 +35,7 @@ export default function ButtonAppBar() {
     };
 
     
-  return (
+    return (
         <Box>
             <AppBar position="static">
                 <Toolbar variant="regular">
@@ -52,35 +52,35 @@ export default function ButtonAppBar() {
 
                     <div className={classes.toolbarButtons}>
 
-                        <Link style={{textDecoration: 'none'}}  to={{pathname: `/home`}}>
-                            <Typography variant="h6" sx={{color: 'secondary.main'}}>Dashboard </Typography>
+                        <Link style={{ textDecoration: 'none' }} to={{ pathname: `/home` }}>
+                            <Typography variant="h6" sx={{ color: 'secondary.main' }}>Dashboard </Typography>
                         </Link>
 
                     </div>
                     
                     <div className={classes.toolbarButtons}>
 
-                        <IconButton onClick={handleClick} aria-controls="menu" aria-haspopip="true" aria-expanded={open ? 'true' : undefined}>
-                            <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.dark', color: 'black'}} src={currentUser.photoURL} />
+                        <IconButton onClick={handleClick} aria-controls="menu" aria-haspopup="true" aria-expanded={open ? 'true' : undefined}>
+                            <Avatar sx={{ width: 40, height: 40, bgcolor: 'secondary.dark', color: 'black' }} src={currentUser.photoURL} />
                         </IconButton>
 
-                            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                                <Link to={{pathname: `/profile/${currentUser.uid}`}}  style={{textDecoration: 'none', color: 'inherit'}}>
-                                    <MenuItem onClick={handleClose}> Profile </MenuItem>
-                                </Link>
+                        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                            <Link to={{ pathname: `/profile/${currentUser.uid}` }} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <MenuItem onClick={handleClose}> Profile </MenuItem>
+                            </Link>
 
-                                <Link to={{pathname: `/account`}}  style={{textDecoration: 'none', color: 'inherit'}}>
-                                    <MenuItem onClick={handleClose}> Account </MenuItem>
-                                </Link>
+                            <Link to={{ pathname: `/account` }} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <MenuItem onClick={handleClose}> Account </MenuItem>
+                            </Link>
 
-                                <Link to={{pathname: `/`}}  style={{textDecoration: 'none', color: 'inherit'}}>
-                                    <MenuItem onClick={logout}> Logout </MenuItem>
-                                </Link>
-                            </Menu>
+                            <Link to={{ pathname: `/` }} style={{ textDecoration: 'none', color: 'inherit' }}>
+                                <MenuItem onClick={logout}> Logout </MenuItem>
+                            </Link>
+                        </Menu>
 
                     </div>
                 </Toolbar>
             </AppBar>
         </Box>
-  );
-}
+    );
+};

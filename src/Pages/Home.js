@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MainCard from '../Components/mainCard/mainCard';
-import {
-    Grid,
-    Typography,
-} from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import UserNavBar from '../Components/userNavbar/userNavbar';
 import { db } from '../context/AuthContext';
 import { getDocs, collection } from '@firebase/firestore';
@@ -38,31 +35,31 @@ export default function Home () {
 
     return (
         <>
-        <UserNavBar />
-        <Grid justifyContent="space-around" container lg={12} sx={{bgcolor: 'primary.dark', minHeight: '100vh'}}>
+            <UserNavBar />
+            <Grid justifyContent="space-around" container lg={12} sx={{ bgcolor: 'primary.dark', minHeight: '100vh' }}>
             
-                {!loading && currentList ? 
+                {!loading && currentList ?
                     currentList.map((user) => (
-                    user.photos[0] ? user.photos.map((photo) => (
-                        <Grid item lg={3}>
-                            <MainCard
-                                key={user.uid}
-                                username={user.username}
-                                userPhoto={user.userPhoto}
-                                displayedImage={photo.url}
-                                description={photo.description}
-                                photoLocation={''}
-                                uid={user.uid}
+                        user.photos[0] ? user.photos.map((photo) => (
+                            <Grid item lg={3}>
+                                <MainCard
+                                    key={user.uid}
+                                    username={user.username}
+                                    userPhoto={user.userPhoto}
+                                    displayedImage={photo.url}
+                                    description={photo.description}
+                                    photoLocation={''}
+                                    uid={user.uid}
                                 />
-                        </Grid>
+                            </Grid>
+                        ))
+                            :
+                            null
                     ))
-                    :
-                    null        
-                ))
-                : <Typography sx={{padding: 4}} color="secondary" variant="h3">Loading Images . . .</Typography> }
+                    : <Typography sx={{ padding: 4 }} color="secondary" variant="h3">Loading Images . . .</Typography>}
             </Grid>
             
             <Footer />
         </>
-    )
-}
+    );
+};

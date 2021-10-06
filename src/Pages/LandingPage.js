@@ -12,12 +12,12 @@ export default function LandingPage() {
   const {currentUser} = useAuth();
   return (
     <>
-        {currentUser ? <UserNavbar /> : <Navbar />}
-        <MainContent />
-        <Divider />
-        <SecondaryContent />
-        <ThirdContent />
-        <Footer />
+      {currentUser ? <UserNavbar /> : <Navbar />}
+      <MainContent />
+      <Divider />
+      <SecondaryContent />
+      <ThirdContent />
+      <Footer />
     </>
   );
-}
+};
