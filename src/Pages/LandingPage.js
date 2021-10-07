@@ -9,7 +9,8 @@ import {Divider} from '@mui/material';
 import { useAuth } from '../context/AuthContext';
 
 export default function LandingPage() {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
+  
   return (
     <>
       {currentUser ? <UserNavbar /> : <Navbar />}

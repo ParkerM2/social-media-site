@@ -60,8 +60,8 @@ export default function MainCard(props) {
                             </Grid>
 
                             <Grid item>
-                                <IconButton>
-                                    <MoreVertIcon onClick={handleClick} fontSize="large" color="secondary" />
+                                <IconButton  onClick={handleClick}>
+                                    <MoreVertIcon fontSize="large" color="secondary" />
                                 </IconButton>
 
                                 <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

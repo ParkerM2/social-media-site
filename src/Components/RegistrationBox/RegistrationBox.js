@@ -158,7 +158,7 @@ export default function RegistrationBox() {
                                         fullWidth
                                         name="password"
                                         label="Password"
-                                        type="password"
+                                        type="new-password"
                                         id="password"
                                     />
                                 </Grid>
@@ -168,7 +168,7 @@ export default function RegistrationBox() {
                                         fullWidth
                                         name="confirmPassword"
                                         label="Confirm Password"
-                                        type="password"
+                                        type="new-password"
                                         id="confirmPassword"
                                     />
                                 </Grid>

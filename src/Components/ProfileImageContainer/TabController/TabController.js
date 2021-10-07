@@ -4,7 +4,6 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import ImageList from '../ImageList/ImageList';
 import AddImage from '../AddImage/AddImage';
 import { useAuth } from '../../../context/AuthContext';
@@ -53,7 +52,6 @@ export default function BasicTabs( { userData } ) {
 
     return (
         <> 
-        <Paper sx={{bgcolor: 'primary.main'}}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           
             <Tabs
@@ -79,7 +77,6 @@ export default function BasicTabs( { userData } ) {
             </TabPanel>
         :
           null}
-          </Paper>
         </>
     );
 }

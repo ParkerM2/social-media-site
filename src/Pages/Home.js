@@ -39,12 +39,12 @@ export default function Home () {
     return (
         <>
             <UserNavBar />
-            <Grid justifyContent="space-around" container lg={12} sx={{ bgcolor: 'primary.dark', minHeight: '100vh' }}>
+            <Grid justifyContent="space-around" container sx={{ bgcolor: 'primary.dark', minHeight: '100vh' }}>
             
                 {!loading && currentList ?
                     currentList.map((user) => (
                         user.photos[0] ? user.photos.map((photo) => (
-                            <Grid item lg={3}>
+                            <Grid item key={photo.url} xs={12} xl={2}>
                                 <MainCard
                                     key={user.uid}
                                     username={user.username}

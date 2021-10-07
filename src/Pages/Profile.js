@@ -110,7 +110,7 @@ export default function Profile () {
                             </Grid>
 
                             <Grid item lg={12} sm={12} sx={{ minWidth: 365, paddingBottom: 5 }} flexDirection="column">
-                                <Paper>
+                                <Paper sx={{ bgcolor: 'primary.main' }}>
                                     <TabController userData={userData} value={value} onChange={handleChange} />
                                 </Paper>
                             </Grid>
