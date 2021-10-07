@@ -32,25 +32,16 @@ export default function Account () {
     const [file1, setFile1] = useState();
     const userRef = doc(db, 'users', currentUser.uid);
 
-    async function getUserData () {
-        
-        try{
-            setLoading(false)
-            const userSnapShot = await getDoc(userRef);
+    const getUserData = async () => {
+        let newData;
+        const userSnapShot = await getDoc(userRef);
 
-            if ( userSnapShot.data().uid !== 'undefined' ) {
-                setUserData(userSnapShot.data())
-                setLoading(true)
-            } else {
-                // set error to show an user profile not found screen <<-
-                console.log('no user found')
-            }
-
-        } catch {
-            setLoading()
-            setErrorText('yo error')
-            return 
+        if (userSnapShot.data().uid !== 'undefined') {
+            newData = userSnapShot.data();
+        } else {
+            setErrorText('error')
         }
+        return newData
     };
 
     const handleImageChange = (event) => {
@@ -58,10 +49,16 @@ export default function Account () {
     };
 
     useEffect(() => {
-        const unsub = getUserData();
-        return unsub;
-    }, []
-    );
+        let mounted = true;
+        getUserData().then((userData) => {
+            console.log('fired')
+            if (mounted) {
+                setUserData(userData);
+                setLoading(true)
+            }
+        })
+        return () => mounted = false;
+    }, []);
 
     const sendNewName = () => {
         updateProfile(currentUser, {

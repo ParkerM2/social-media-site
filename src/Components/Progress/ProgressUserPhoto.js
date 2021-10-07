@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useStorage from '../../hooks/useStorage';
+import { Typography } from '@mui/material';
 import { updateDoc, doc } from '@firebase/firestore';
 import { updateProfile } from '@firebase/auth';
 import { db, useAuth } from '../../context/AuthContext';
@@ -17,7 +18,8 @@ const ProgressUpdateUserProfileImage = ({ file1, setFile1 }) => {
 
     useEffect(() => {
         setFinishedMessage('')
-        if (url) {
+        let mounted = true
+        if (url && mounted === true) {
             // update firebase db
             updateDoc(userRef,
                 { userPhoto: url },
@@ -35,14 +37,16 @@ const ProgressUpdateUserProfileImage = ({ file1, setFile1 }) => {
             })
         };
 
-    }, [url, setFile1])
+        return () => mounted = false;
+
+    }, [url, setFile1, currentUser, userRef, history])
 
     return (
         <>
             {!error ?
-                <div> Progress :{progress}% {finishedMessage} </div>
+                <Typography> Progress : {progress} </Typography>
                 :
-                <div> Error: {errorMessage}</div>
+                <Typography> Error: {errorMessage} {finishedMessage}</Typography>
             }
         </>
     );

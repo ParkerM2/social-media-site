@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useStorage from '../../hooks/useStorage';
 import { doc, arrayUnion, setDoc } from '@firebase/firestore';
 import { db, useAuth } from '../../context/AuthContext';
+import { Typography } from '@mui/material';
 
 const ProgressAddImage = ({ file1, setFile1, description }) => {
     const { url, progress } = useStorage(file1);
@@ -9,9 +10,10 @@ const ProgressAddImage = ({ file1, setFile1, description }) => {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const userRef = doc(db, 'users', currentUser.uid)
-
+    
     useEffect(() => {
-        if (url) {
+        let mounted = true;
+        if (url && mounted === true) {
             // update firebase db with new image and image data
             setDoc(userRef,
                 {
@@ -29,14 +31,15 @@ const ProgressAddImage = ({ file1, setFile1, description }) => {
             setErrorMessage('An Error has occurred')
             setError(true)
         }
-    }, [url, setFile1])
+        return () => mounted = false;
+    }, [url, setFile1, description, currentUser.uid, userRef])
 
     return (
         <>
             {!error ?
-                <div> Progress : {progress} </div>
+                <Typography> Progress : {progress} </Typography>
                 :
-                <div> Error: {errorMessage}</div>
+                <Typography> Error: {errorMessage}</Typography>
             }
         </>
     );

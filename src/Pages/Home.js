@@ -24,13 +24,16 @@ export default function Home () {
 
     
     useEffect(() => {
+        let mounted = true;
         setLoading(true)
-
         getData().then((newArray) => {
-            setCurrentList(newArray)
-            setLoading(false)
+            console.log('useeffect fired')
+            if (mounted) {
+                setCurrentList(newArray)
+                setLoading(false)
+            }
         })
-
+        return () => mounted = false;
     }, []);
 
     return (
