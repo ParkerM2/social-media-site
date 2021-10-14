@@ -39,6 +39,7 @@ export default function SecondaryContent() {
                                 <Typography variant="h4" color="secondary.dark">Things :</Typography>
                                 <Typography color="secondary.dark">Use your profile to post things</Typography>
                                 <Typography color="secondary.dark">Each thing contains a picture and description</Typography>
+                                <Typography color="secondary.dark">Click on the Profile pic to view the users Profile</Typography>
                             </Paper>
                         </Grid>
                         {/* {username, userPhoto, displayedImage, description, photoLocation} */}

@@ -12,18 +12,19 @@ import {
     Typography,
     Paper,
     Container,
+    IconButton,
 } from '@mui/material';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import { db, useAuth } from '../../context/AuthContext';
 import {doc, setDoc, serverTimestamp, query, collection, where, getDocs,} from 'firebase/firestore';
 import {updateProfile, getAuth, signOut} from 'firebase/auth';
 import { useHistory } from 'react-router';
-
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function RegistrationBox() {
     const { signup } = useAuth();
     const [error, setError] = React.useState("");
-    const [loading, setLoading] = React.useState(false)
+    // const [loading, setLoading] = React.useState(false)
     const history = useHistory();
 
     async function doesUsernameExist(username) {
@@ -91,7 +92,7 @@ export default function RegistrationBox() {
                 setError(error.message)
                 return;
             }
-            setLoading(false)
+            // setLoading(false)
         } else {
             setError('That Username is already taken');
             return;
@@ -111,10 +112,10 @@ export default function RegistrationBox() {
                         alignItems: 'center',
                     }}
                 >
-                    <Paper square variant="outlined" sx={{ bgcolor: 'white', color: 'primary.dark', padding: 4 }}>
+                    <Paper square variant="outlined" sx={{ bgcolor: 'secondary.dark', color: 'primary.dark', padding: 4 }}>
                         <Grid container justifyContent="center">
                             <Grid item align="center">
-                                <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
+                                <Avatar sx={{ m: 2, bgcolor: 'primary.light' }}>
                                     <ApartmentIcon />
                                 </Avatar>
                                 <Typography component="h1" variant="h5">
@@ -179,7 +180,7 @@ export default function RegistrationBox() {
                                     />
                                 </Grid>
                             </Grid>
-                            <Button
+                            {/* <Button
                                 disabled={loading}
                                 type="submit"
                                 fullWidth
@@ -187,13 +188,26 @@ export default function RegistrationBox() {
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 Sign Up
-                            </Button>
+                            </Button> */}
+                            <Button sx={{ mt: 3, mb: 2 }} fullWidth variant="contained">Disabled</Button>
                             <Grid container justifyContent="flex-end">
                                 <Grid item>
                                     <Link href="/signin" variant="body2">
                                         Already have an account? Sign in
                                     </Link>
                                 </Grid>
+                            </Grid>
+                            <Grid container justifyContent="center" paddingTop={2}> 
+                                <Paper sx={{ bgcolor: 'primary.main' }} variant="outlined">
+                                    <Typography align="center" padding={1} color="secondary.dark" variant="h5" marked="center"> ** Database functions are currently disabled to make sure I'm not charged by firebase. **<br></br> Feel free to look at my github to view the code.</Typography>
+                                    <Grid container justifyContent="center">
+                                        <Grid item>
+                                            <IconButton href="https://github.com/ParkerM2/social-media-site">
+                                                <GitHubIcon fontSize="large" color="secondary" />
+                                            </IconButton>
+                                        </Grid>
+                                    </Grid>
+                                </Paper>
                             </Grid>
                         </Box>
                     </Paper>

@@ -16,20 +16,20 @@ import UserNavbar from '../Components/userNavbar/userNavbar';
 import Navbar from '../Components/LandingPage/Navbar/Navbar';
 import Footer from '../Components/LandingPage/Footer/Footer';
 import { db, useAuth } from '../context/AuthContext';
-import { doc, getDoc, updateDoc, } from '@firebase/firestore';
+import { doc, getDoc } from '@firebase/firestore';
 import stockPhoto from '../images/stockphoto.jpg';
-import { ProgressUpdateUserProfileImage } from '../Components/Progress/ProgressUserPhoto';
-import { updateProfile } from '@firebase/auth';
+// import { ProgressUpdateUserProfileImage } from '../Components/Progress/ProgressUserPhoto';
+// import { updateProfile } from '@firebase/auth';
 
 export default function Account () {
     const [userData, setUserData] = useState();
     const [loading, setLoading] = useState();
     const [errorText, setErrorText] = useState('');
     const { currentUser } = useAuth();
-    const [newFullName, setNewFullName] = useState();
-    const [newUserName, setNewUserName] = useState();
-    const [newImage, setNewImage] = useState();
-    const [file1, setFile1] = useState();
+    // const [newFullName, setNewFullName] = useState();
+    // const [newUserName, setNewUserName] = useState();
+    // const [newImage, setNewImage] = useState();
+    // const [file1, setFile1] = useState();
     const userRef = doc(db, 'users', currentUser.uid);
 
     const getUserData = async () => {
@@ -44,9 +44,9 @@ export default function Account () {
         return newData
     };
 
-    const handleImageChange = (event) => {
-        setFile1(newImage[0])
-    };
+    // const handleImageChange = (event) => {
+    //     setFile1(newImage[0])
+    // };
 
     useEffect(() => {
         let mounted = true;
@@ -60,29 +60,29 @@ export default function Account () {
         return () => mounted = false;
     }, []);
 
-    const sendNewName = () => {
-        updateProfile(currentUser, {
-            displayName: newFullName
-        }).then(() => {
-            // set success here
-        }).catch((error) => {
-            // set error here
-        })
+    // const sendNewName = () => {
+    //     updateProfile(currentUser, {
+    //         displayName: newFullName
+    //     }).then(() => {
+    //         // set success here
+    //     }).catch((error) => {
+    //         // set error here
+    //     })
 
-        updateDoc(userRef,
-            {
-                'fullname': newFullName
-            },
-        );
-    };
+    //     updateDoc(userRef,
+    //         {
+    //             'fullname': newFullName
+    //         },
+    //     );
+    // };
 
-    const sendNewUserName = () => {
-        updateDoc(userRef,
-            {
-                'username': newUserName
-            },
-        );
-    };
+    // const sendNewUserName = () => {
+    //     updateDoc(userRef,
+    //         {
+    //             'username': newUserName
+    //         },
+    //     );
+    // };
 
     return (
         <>
@@ -118,7 +118,6 @@ export default function Account () {
                                                 {userData.username}
                                             </Typography>
                                         }
-                        
                                         <Typography sx={{ paddingTop: 3 }}>
                                             {userData.photos.length} Post
                                         </Typography>
@@ -131,7 +130,6 @@ export default function Account () {
                                     </CardContent>
                                 </Card>
                             </Grid>
-
                             <Grid item lg={12} sm={12} sx={{ minWidth: 365, paddingBottom: 5 }} flexDirection="column">
                                 <Paper sx={{ bgcolor: 'primary.light', color: 'secondary.main', paddingTop: 2 }}>
                                     <Typography sx={{ paddingBottom: 1 }} color="secondary.main"> {userData.fullname}'s Settings </Typography>
@@ -141,19 +139,23 @@ export default function Account () {
                                             <Typography variant="caption">Current Users full name: {userData.fullname}</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <TextField onChange={(event) => { setNewFullName(event.target.value) }} color="secondary" variant="outlined" label="full name"></TextField>
+                                            {/* <TextField onChange={(event) => { setNewFullName(event.target.value) }} color="secondary" variant="outlined" label="full name"></TextField> */}
+                                            <TextField color="secondary" variant="outlined" label="full name"></TextField>
                                         </Grid>
                                         <Grid item xs={11}>
-                                            <Button onClick={sendNewName} type="submit" fullWidth variant="contained">Submit New full name</Button>
+                                            {/* <Button onClick={sendNewName} type="submit" fullWidth variant="contained">Submit New full name</Button> */}
+                                            <Button fullWidth variant="contained">Disabled</Button>
                                         </Grid>
                                         <Grid item xs={5}>
                                             <Typography variant="caption">Current Users user name: {userData.username}</Typography>
                                         </Grid>
                                         <Grid item xs={6}>
-                                            <TextField onChange={(event) => { setNewUserName(event.target.value) }} color="secondary" variant="outlined" label="user name"></TextField>
+                                            {/* <TextField onChange={(event) => { setNewUserName(event.target.value) }} color="secondary" variant="outlined" label="user name"></TextField> */}
+                                            <TextField color="secondary" variant="outlined" label="user name"></TextField>
                                         </Grid>
                                         <Grid item xs={11}>
-                                            <Button onClick={sendNewUserName} type="submit" fullWidth variant="contained">Submit New user name</Button>
+                                            {/* <Button onClick={sendNewUserName} type="submit" fullWidth variant="contained">Submit New user name</Button> */}
+                                            <Button fullWidth variant="contained">Disabled</Button>
                                         </Grid>
                                         <Grid item xs={5}>
                                             <Typography variant="caption">Update current user photo:</Typography>
@@ -164,14 +166,15 @@ export default function Account () {
                                                 maxFileSize={5000000}
                                                 filesLimit={1}
                                                 accept="image/jpeg"
-                                                onChange={setNewImage}
+                                                // onChange={setNewImage}
                                                 style={{ height: 40 }}
                                             />
                                         </Grid>
                                         <Grid item xs={11} sx={{ paddingBottom: 2 }}>
-                                            <Button onClick={handleImageChange} fullWidth component="label" variant="contained"> Submit new Photo
+                                            {/* <Button onClick={handleImageChange} fullWidth component="label" variant="contained"> Submit new Photo
                                             </Button>
-                                            {file1 && <ProgressUpdateUserProfileImage file1={file1} setFile1={setFile1} />}
+                                            {file1 && <ProgressUpdateUserProfileImage file1={file1} setFile1={setFile1} />} */}
+                                            <Button fullWidth variant="contained">Disabled</Button>
                                         </Grid>
                                     </Grid>
                                 </Paper>

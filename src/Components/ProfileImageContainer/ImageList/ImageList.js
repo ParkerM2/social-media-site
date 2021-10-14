@@ -22,7 +22,6 @@ export default function MasonryImageList( { data } ) {
             />
           </ImageListItem>
         ))}
-
       </ImageList>
       </Grid>
       </>

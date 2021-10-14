@@ -7,6 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -17,6 +18,7 @@ import Apartment from '@mui/icons-material/Apartment';
 import { Divider } from '@mui/material';
 import { useAuth } from '../context/AuthContext';
 import { useHistory } from 'react-router-dom';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export default function SignIn() {
     const [errorText, setErrorText] = React.useState('')
@@ -29,23 +31,29 @@ export default function SignIn() {
         const data = new FormData(event.currentTarget);
         try {
             setErrorText('')
-            await login(data.get('email'), data.get('password'))
+            await login(data.get('email'), data.get('password')).then((res) => {
+                console.log(res)
+                if (res.uid.length > 5) {
+                    history.push('/home')
+                } else {
+                    setErrorText('An error occurred')
+                }
+            })
             // set success here so user can go to home page
         } catch {
-            setErrorText('An Error Occurred')
+            setErrorText('Invalid Email/Password')
             return;
         }
     
-        history.push('/home')
+        // history.push('/home')
     };
 
     return (
         <>
-            <NavBar />
             <Grid sx={{
                 bgcolor: 'primary.dark',
                 minHeight: '95vh',
-                position: 'relative',
+                position: 'inherit',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
@@ -53,21 +61,34 @@ export default function SignIn() {
                 textAlign: 'left',
                 paddingBottom: 8
             }}>
+                <NavBar />
+                <Grid paddingTop={4} spacing={2} container justifyContent="center">
+                    <Grid item xs={11} sm={7} md={3} lg={2}>
+                        <Paper sx={{ bgcolor: 'primary.main', minHeight: 150 }}>
+                            <Typography padding={2} align="center" color="secondary.dark" variant="h4" marked="center"> Feel free to log in with the following test account:</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={11} sm={7} md={3} lg={2}>
+                        <Paper sx={{ bgcolor: 'primary.main', minHeight: 150 }}>
+                            <Typography padding={2} align="center" color="secondary.dark" variant="h4" marked="center"> Email: Test@test.com<br></br> Password: 123456</Typography>
+                        </Paper>
+                    </Grid>
+                </Grid>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <Box
                         sx={{
-                            paddingTop: 8,
+                            paddingTop: 2,
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'center',
                         }}
                     >
 
-                        <Paper square variant="outlined" sx={{ bgcolor: 'white', color: 'secondary', padding: 4 }}>
+                        <Paper square variant="outlined" sx={{ bgcolor: 'secondary.dark', color: 'primary.dark', padding: 4 }}>
                             <Grid container justifyContent="center">
                                 <Grid item align="center">
-                                    <Avatar sx={{ m: 2, bgcolor: 'secondary.dark' }}>
+                                    <Avatar sx={{ m: 2, bgcolor: 'primary.light' }}>
                                         <Apartment />
                                     </Avatar>
                                     <Typography component="h1" variant="h5">
@@ -121,6 +142,18 @@ export default function SignIn() {
                                             {"Don't have an account? Sign Up"}
                                         </Link>
                                     </Grid>
+                                </Grid>
+                                <Grid container justifyContent="center" paddingTop={2}>
+                                    <Paper sx={{ bgcolor: 'primary.main' }} variant="outlined">
+                                        <Typography align="center" padding={1} color="secondary.dark" variant="h5" marked="center"> ** Database functions are currently disabled to make sure I'm not charged by firebase. **<br></br> Feel free to look at my github to view the code.</Typography>
+                                        <Grid container justifyContent="center">
+                                            <Grid item>
+                                                <IconButton href="https://github.com/ParkerM2/social-media-site">
+                                                    <GitHubIcon fontSize="large" color="secondary" />
+                                                </IconButton>
+                                            </Grid>
+                                        </Grid>
+                                    </Paper>
                                 </Grid>
                             </Box>
                         </Paper>
